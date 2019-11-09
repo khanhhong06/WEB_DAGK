@@ -1,0 +1,25 @@
+.nav-custom{
+	color: #ffffff;
+	padding: 30px;
+}
+
+#intro{
+	padding: 30px;
+}
+
+.btn{
+	border-color: #0080ff;
+	color: #0080ff;
+}
+
+.good .card{
+	display: inline-block;
+}
+
+.card{
+	margin:5px;
+}
+
+.good .card .btn{
+	background-color: white;
+}
