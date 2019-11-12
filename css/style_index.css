@@ -1,0 +1,20 @@
+.nav-custom{
+	color: #ffffff;
+	padding: 30px;
+}
+
+#intro{
+	padding: 30px;
+}
+
+.good .card{
+	display: inline-block;
+}
+
+.card{
+	margin:5px;
+}
+
+.breadcrumb-item{
+	margin-left: 15px;
+}
