@@ -18,3 +18,8 @@
 .breadcrumb-item{
 	margin-left: 15px;
 }
+
+.col-centered{
+	float: none;
+	margin: auto;
+}
