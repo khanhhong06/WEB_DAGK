@@ -8,20 +8,19 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" role="navigation">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" role="navigation">
     <div class="container" style="margin-left: 20px">
         <a class="navbar-brand" href="#" style="font-size: 20px">ONLINE AUNCTION</a>
         <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
             &#9776;
         </button>
         <div class="collapse navbar-collapse" id="exCollapsingNavbar" style="margin-left: 10px">
-            <ul class="nav navbar-nav">
-                <li class="nav-item"><a href="#" class="nav-link">About</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Link</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Service</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">More</a></li>
-
-            </ul>
+          <ul class="nav navbar-nav">
+            <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Link</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Service</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">More</a></li>
+          </ul>
             <ul class="nav navbar-nav flex-row justify-content-between ml-auto" style="margin-right: -300px">
                 <li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i class="fa fa-cog fa-fw fa-lg"></i></a></li>
                 <li class="dropdown order-1">
@@ -49,7 +48,7 @@
             </ul>
         </div>
     </div>
-    </nav>
+  </nav>
 	</br></br></br>
 	<div class="bd-example">
       <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
@@ -90,7 +89,7 @@
           <span class="sr-only">Next</span>
         </a>
       </div>
-    </div>
+  </div>
 	
     <ul class="nav nav-pills navbar navbar-light bg-light">
       <li>
@@ -109,19 +108,34 @@
         <button type="button" class="btn btn-outline-dark">Tìm kiếm</button>
       </li>     
     </ul>
-    <div class="col-lg-9 col-centered mt-4" style="max-width: 1024px;">
+    <div class="col-lg-9 col-centered mt-4">
         <div class="row no-gutters">
             <div class="col-md-4">
-                <img src="http://placehold.it/900x400" class="card-img ml-2" alt="..." style="width: 300px; height: 300px;">
+                <img src="http://placehold.it/300x300"  alt="..." style="width: 300px; height: 300px;">
+                <ul class="row" style="list-style: none; margin-top:5px; padding:0; margin-left: 0;">
+                  <li><img src="http://placehold.it/100x100" alt="..." style="width: 100px; height:100px; padding-right: 5px;"></li>
+                  <li><img src="http://placehold.it/100x100" alt="..." style="width: 100px; height:100px; padding-right: 5px"></li>
+                  <li><img src="http://placehold.it/100x100" alt="..." style="width: 100px; height:100px;"></li>
+                </ul>
             </div>
             <div class="col-md-8">
                 <div class="card-body">
                     <h3 class="card-title">Product Name</h3>                    
                     <h4 class="mb-0">Giá hiện tại: 2.590.000đ</h4>
-                    <small class="text-muted">Bidder: Johny English</small>
-                    <p class="card-text mt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!</p>
+                    <h4 class="mb-0">Giá mua ngay: </h4>
+                    <small class="text-muted">Người bán: ABCDEF</small>
                     <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
                     4.0 stars
+                    <br>
+                    <small class="text-muted">Ngày đăng: 16/11/2019</small>
+                    <br>
+                    <small class="text-muted">Thời điểm kết thúc: 23h00 20/11/2019</small>
+                    <br>
+                    <p class="card-text mt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!</p>
+                    <small class="text-muted">Bidder ra giá cao nhất: Johny English</small>
+                    <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+                    4.0 stars
+                    
                     <form class="form-inline">
                         <div class="form-group mb-2">
                             <label for="bidPrice" class="sr-only">Bid Price</label>
@@ -131,14 +145,14 @@
                             <label for="inputPassword2" class="sr-only"></label>
                             <input type="password" class="form-control" id="inputPassword2" placeholder="Higher than current price" style="width: 300px">
                         </div>
-                        <button type="submit" class="btn btn-primary mb-2">Bid</button>
+                        <button type="submit" class="btn btn-secondary mb-2">Bid</button>
                     </form>
                 </div>
             </div>
         </div>
         <div class="card card-outline-secondary my-4">
             <div class="card-header">
-                Product Reviews
+                Reviews sản phẩm
             </div>
             <div class="card-body">
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
@@ -150,8 +164,91 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
                 <small class="text-muted">Posted by Anonymous on 3/1/17</small>
                 <hr>
-                <a href="#" class="btn btn-success">Leave a Review</a>
+                <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                  Lịch sử đấu giá
+                </button>
+                <div class="collapse" id="collapseExample">
+                  <div class="card card-body">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Thời điểm</th>
+                          <th scope="col">Người mua</th>
+                          <th scope="col">Giá</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">1</th>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>10000</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">2</th>
+                          <td>Jacob</td>
+                          <td>Thornton</td>
+                          <td>10000</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">3</th>
+                          <td>Larry</td>
+                          <td>the Bird</td>
+                          <td>10000</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
             </div>
+        </div>
+        <div class="card card-outline-secondary my-4">
+          <div class="card-header">
+            Sản phẩm tương tự
+          </div>
+          <div class="card-body row m-1">
+            <div class="card" style="width: 13rem;">
+              <img src="http://placehold.it/100x100" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-secondary">Đấu giá</a>
+              </div>
+            </div>
+            <div class="card" style="width: 13rem;">
+              <img src="http://placehold.it/100x100" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-secondary">Đấu giá</a>
+              </div>
+            </div>
+            <div class="card" style="width: 13rem;">
+              <img src="http://placehold.it/100x100" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-secondary">Đấu giá</a>
+              </div>
+            </div>
+            <div class="card" style="width: 13rem;">
+              <img src="http://placehold.it/100x100" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-secondary">Đấu giá</a>
+              </div>
+            </div>
+            <div class="card" style="width: 13rem;">
+              <img src="http://placehold.it/100x100" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-secondary">Đấu giá</a>
+              </div>
+            </div>
+          </div>
         </div>
     </div>
     <footer class="footer ml-5 p-3">
