@@ -100,6 +100,7 @@
                 <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-2" role="tab" aria-controls="favourite">Sản phẩm yêu thích</a>
                 <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-3" role="tab" aria-controls="bidding">Sản phẩm đang đấu giá</a>
                 <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-4" role="tab" aria-controls="won">Sản phẩm đã thắng</a>
+                <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-5" role="tab" aria-controls="comment">Xem đánh giá</a>
               </div>
             </div>
             <div class="col-8">
@@ -114,6 +115,9 @@
                                     <h3 class="card-title">Thông tin tài khoản</h3>                    
                                     <p>Họ tên: Trần Lê Khánh Hồng</p>
                                     <p>Email: khanhhong141049@gmail.com</p>
+                                    <p id="point">Điểm đánh giá: +1</p>
+                                    <p>Loại tài khoản: Bidder</p>
+                                    <button type="button" id="btnupgrage" class="btn btn-outline-success">Upgrage thành seller</button>
                                     <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-secondary" style="color: black;">Đổi mật khẩu<span class="caret"></span></button>
                                     <ul class="dropdown-menu dropdown-menu-right mt-2">
                                       <li class="px-3 py-2">
@@ -269,10 +273,43 @@
                       </div>
                       </div>
                 </div>
+                <div class="tab-pane fade" id="list-5" role="tabpanel" aria-labelledby="list-settings-list">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Thời gian</th>
+                        <th scope="col">Người đánh giá</th>
+                        <th scope="col">Đánh giá</th>
+                        <th scope="col">Nhận xét</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">21/09/2019</th>
+                        <td>Mark</td>
+                        <td>+1</td>
+                        <td>Giao dịch đúng hẹn</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">10/10/2019</th>
+                        <td>Jacob</td>
+                        <td>+1</td>
+                        <td>Uy tín</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">11/11/2019</th>
+                        <td>Larry</td>
+                        <td>-1</td>
+                        <td>bom hàng</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
               </div>
             </div>
         </div>
-
+          
         <footer class="footer ml-5 p-3">
             <div class="row">
                 <div class="col-12 col-md">
@@ -300,6 +337,8 @@
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+        
     </body>
 </html>
