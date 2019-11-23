@@ -98,15 +98,27 @@
         </a>
       </div>
     </div>
-    <div style="display: flex; flex-direction: row; margin-left:180px; margin-right:20px; margin-top:10px">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Điện tử</button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Điện thoại di động</a>
-            <a class="dropdown-item" href="#">Máy tính xách tay</a>
-        </div>
-        <input class="form-control mr-sm-2 flex-end" type="search" placeholder="Search" aria-label="Search" style="max-width: 300px; margin-left: auto;">
-        <button type="button" class="btn btn-outline-dark" style="display: flex;justify-content: flex-end">Tìm kiếm</button>
-    </div>
+    
+    <ul class="nav nav-pills navbar navbar-light bg-light">
+          <li>
+            <div class="dropdown" style="margin-left: 50%">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Điện tử</button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Điện thoại di động</a>
+              <a class="dropdown-item" href="#">Máy tính xách tay</a>
+            </div>
+            </div>
+          </li>
+          <ul class="nav nav-pills navbar navbar-light bg-light">
+            <li>
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            </li>
+            <li style="margin-left: 10px">
+              <button type="button" class="btn btn-outline-dark">Tìm kiếm</button>
+            </li>
+          </ul>
+    </ul>
+
     <div class="col-lg-9 col-centered mt-4">
         <div class="row no-gutters">
             <div class="col-md-4">
