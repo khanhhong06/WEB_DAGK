@@ -7,7 +7,7 @@
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" role="navigation">
     <div class="container">
-        <a class="navbar-brand" href="#" style="font-size: 20px">ONLINE AUNCTION</a>
+        <a class="navbar-brand" href="index.html" style="font-size: 20px">ONLINE AUNCTION</a>
         <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
             &#9776;
         </button>
@@ -115,12 +115,11 @@
 		</li>
 	  </ul>
 	</ul>
-	</br>
 
 	<div style="margin-top: 50px;margin-left: 50px;margin-right: 50px ">
 	<ul class="nav nav-pills navbar navbar-light bg-light">
 	  <li style="display: inline-block;">
-		 <h4>Quản lý tài khoản</h4>
+		 <h3>Quản lý tài khoản</h3>
 	  </li>
 	  <li>
 	  	<ul class="nav nav-pills navbar navbar-light bg-light">
@@ -128,47 +127,234 @@
 	  		<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
 	  	</li>
 		<li style="margin-left: 10px">
-		  	<button type="button" class="btn btn-outline-dark">Tìm kiếm</button>
+		  	<button type="button" class="btn btn-outline-info">Tìm kiếm</button>
+		</li>
+		<li style="margin-left: 10px">
+			<button type="button" class="btn btn-outline-success">Thêm</button>
 		</li>
 	  </ul>
 	  </li>	  
 	</ul>
 	</div>
-	<div style="margin-left: 50px;margin-right: 50px">
-		<ul class="list-group">
-		  <li class="list-group-item">
-		  	<ul>
-		  		<li style="display: inline-block;">Trần Lê Khánh Hồng</li>
-		  		<li style="display: inline-block;">
-		  			<ul style="justify-content: flex-end;">
-		  				<li style="display: inline-block;">
-		  					<button type="button" class="btn btn-info">Edit</button>
-		  				</li>
-		  				<li style="display: inline-block;">
-							<button type="button" class="btn btn-danger">Delete</button>
-		  				</li>
-		  			</ul>
-		  		</li>
-		  	</ul>
-		  </li>
-		  <li class="list-group-item">
-		  	<ul>
-		  		<li style="display: inline-block;">Trương Quang Duy</li>
-		  		<li style="display: inline-block;">
-		  			<ul style="justify-content: flex-end;">
-		  				<li style="display: inline-block;">
-		  					<button type="button" class="btn btn-info">Edit</button>
-		  				</li>
-		  				<li style="display: inline-block;">
-							<button type="button" class="btn btn-danger">Delete</button>
-		  				</li>
-		  			</ul>
-		  		</li>
-		  	</ul>
-		  </li>
-		  
-		</ul>
+	
+	<div class="table-wrapper-scroll-y my-custom-scrollbar" style="margin-left: 50px;margin-right: 50px">
+	  <table class="table table-bordered table-striped mb-0"  style="text-align: center;">
+	    <thead>
+	      <tr style="font-size: 19px">	      
+	        <th scope="col" style="width: 10%">Mã</th>
+	        <th scope="col" style="width: 25%">Tên</th>
+	        <th scope="col" style="width: 25%">Loại tài khoản</th>
+	        <th scope="col" style="width: 20%">Đánh giá</th>
+	        <th scope="col" style="width: 20%">Thao tác</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr>
+	        <th scope="row">US0001</th>
+	        <td>Mark</td>
+	        <td>Bidder</td>
+	        <td>+2</td>
+	        <td>
+	        	<button type="button" class="btn btn-success" style="font-size:14px">Upgrade</button>
+	        	<button type="button" class="btn btn-dark" style="font-size:14px">Block</button>
+	        	<button type="button" class="btn btn-danger" style="font-size:14px">Delete</button>
+	        </td>
+	      </tr>
+	      <tr>
+	        <th scope="row">US0002</th>
+	        <td>Jacob</td>
+	        <td>Bidder</td>
+	        <td>-1</td>
+			<td>
+	        	<button type="button" class="btn btn-success" style="font-size:14px">Upgrade</button>
+	        	<button type="button" class="btn btn-dark" style="font-size:14px">Block</button>
+	        	<button type="button" class="btn btn-danger" style="font-size:14px">Delete</button>
+	        </td>
+	      </tr>
+	      <tr>
+	        <th scope="row">US0003</th>
+	        <td>Larry</td>
+	        <td>Seller</td>
+	        <td>+5</td>
+	        <td>
+	        	<button type="button" class="btn btn-success" style="font-size:14px">Upgrade</button>
+	        	<button type="button" class="btn btn-dark" style="font-size:14px">Block</button>
+	        	<button type="button" class="btn btn-danger" style="font-size:14px">Delete</button>
+	        </td>
+	      </tr>
+	      <tr>
+	        <th scope="row">US0004</th>
+	        <td>Mark</td>
+	        <td>Bidder</td>
+	        <td>+3</td>
+	        <td>
+	        	<button type="button" class="btn btn-success" style="font-size:14px">Upgrade</button>
+	        	<button type="button" class="btn btn-dark" style="font-size:14px">Block</button>
+	        	<button type="button" class="btn btn-danger" style="font-size:14px">Delete</button>
+	        </td>
+	      </tr>
+	      <tr>
+	        <th scope="row">US0005</th>
+	        <td>Jacob</td>
+	        <td>Seller</td>
+	        <td>-3</td>
+	        <td>
+	        	<button type="button" class="btn btn-success" style="font-size:14px">Upgrade</button>
+	        	<button type="button" class="btn btn-dark" style="font-size:14px">Block</button>
+	        	<button type="button" class="btn btn-danger" style="font-size:14px">Delete</button>
+	        </td>
+	      </tr>
+	      <tr>
+	        <th scope="row">US0006</th>
+	        <td>Larry</td>
+	        <td>Bidder</td>
+	        <td>+10</td>
+	        <td>
+	        	<button type="button" class="btn btn-success" style="font-size:14px">Upgrade</button>
+	        	<button type="button" class="btn btn-dark" style="font-size:14px">Block</button>
+	        	<button type="button" class="btn btn-danger" style="font-size:14px">Delete</button>
+	        </td>
+	      </tr>
+	      <tr>
+	        <th scope="row">US0007</th>
+	        <td>Larry</td>
+	        <td>Seller</td>
+	        <td>+5</td>
+	        <td>
+	        	<button type="button" class="btn btn-success" style="font-size:14px">Upgrade</button>
+	        	<button type="button" class="btn btn-dark" style="font-size:14px">Block</button>
+	        	<button type="button" class="btn btn-danger" style="font-size:14px">Delete</button>
+	        </td>
+	      </tr>
+	    </tbody>
+	  </table>
 	</div>
+	</br>
+
+	<nav aria-label="Page navigation example">
+	  <ul class="pagination justify-content-center">
+	    <li class="page-item disabled">
+	      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+	    </li>
+	    <li class="page-item"><a class="page-link" href="#">1</a></li>
+	    <li class="page-item"><a class="page-link" href="#">2</a></li>
+	    <li class="page-item"><a class="page-link" href="#">3</a></li>
+	    <li class="page-item">
+	      <a class="page-link" href="#">Next</a>
+	    </li>
+	  </ul>
+	</nav>
+	</br>
+
+	<div style="margin-top: 50px;margin-left: 50px;margin-right: 50px ">
+	<ul class="nav nav-pills navbar navbar-light bg-light">
+	  <li style="display: inline-block;">
+		 <h3>Quản lý giao dịch</h3>
+	  </li>
+	  <li>
+	  	<ul class="nav nav-pills navbar navbar-light bg-light">
+	  	<li>
+	  		<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+	  	</li>
+		<li style="margin-left: 10px">
+		  	<button type="button" class="btn btn-outline-info">Tìm kiếm</button>
+		</li>
+		<li style="margin-left: 10px">
+			<button type="button" class="btn btn-outline-success">Thêm</button>
+		</li>
+	  </ul>
+	  </li>	  
+	</ul>
+	</div>
+
+	<div class="table-wrapper-scroll-y my-custom-scrollbar" style="margin-left: 50px;margin-right: 50px">
+	  <table class="table table-bordered table-striped mb-0"  style="text-align: center;">
+	    <thead>
+	      <tr style="font-size: 19px">	      
+	        <th scope="col" style="width: 10%">Mã</th>
+	        <th scope="col" style="width: 20%">Người mua</th>
+	        <th scope="col" style="width: 20%">Người bán</th>
+	        <th scope="col" style="width: 15%">Mã sản phẩm</th>
+	        <th scope="col" style="width: 15%">Giá chốt</th>
+	        <th scope="col" style="width: 20%">Thao tác</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr>
+	        <th scope="row">AT0001</th>
+	        <td>Mark</td>
+	        <td>Font</td>
+	        <td>SP0001</td>
+	        <td>2.000.000VNĐ</td>
+	        <td><button type="button" class="btn btn-danger" style="font-size:14px">Delete</button></td>
+	      </tr>
+	      <tr>
+	        <th scope="row">AT0002</th>
+	        <td>Jacob</td>
+	        <td>Sam</td>
+	        <td>SP0002</td>
+	        <td>150.000VNĐ</td>
+			<td><button type="button" class="btn btn-danger" style="font-size:14px">Delete</button></td>
+	      </tr>
+	      <tr>
+	        <th scope="row">AT0003</th>
+	        <td>Larry</td>
+	        <td>Smith</td>
+	        <td>SP0003</td>
+	        <td>2.000.000VNĐ</td>
+	        <td><button type="button" class="btn btn-danger" style="font-size:14px">Delete</button></td>
+	      </tr>
+	      <tr>
+	        <th scope="row">AT0004</th>
+	        <td>Font</td>
+	        <td>Blink</td>
+	        <td>SP0004</td>
+	        <td>3.500.000VNĐ</td>
+	        <td><button type="button" class="btn btn-danger" style="font-size:14px">Delete</button></td>
+	      </tr>
+	      <tr>
+	        <th scope="row">AT0005</th>
+	        <td>Jacob</td>
+	        <td>Kristen</td>
+	        <td>SP0005</td>
+	        <td>300.000VNĐ</td>
+	        <td><button type="button" class="btn btn-danger" style="font-size:14px">Delete</button></td>
+	      </tr>
+	      <tr>
+	        <th scope="row">AT0006</th>
+	        <td>Liam</td>
+	        <td>Buck</td>
+	        <td>SP0006</td>
+	        <td>400.000VNĐ</td>
+	        <td><button type="button" class="btn btn-danger" style="font-size:14px">Delete</button></td>
+	      </tr>
+	      <tr>
+	        <th scope="row">AT0007</th>
+	        <td>Samantha</td>
+	        <td>Alex</td>
+	        <td>SP0007</td>
+	        <td>1.200.000VNĐ</td>
+	        <td><button type="button" class="btn btn-danger" style="font-size:14px">Delete</button></td>
+	      </tr>
+	    </tbody>
+	  </table>
+	</div>
+	</br>
+
+	<nav aria-label="Page navigation example">
+	  <ul class="pagination justify-content-center">
+	    <li class="page-item disabled">
+	      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+	    </li>
+	    <li class="page-item"><a class="page-link" href="#">1</a></li>
+	    <li class="page-item"><a class="page-link" href="#">2</a></li>
+	    <li class="page-item"><a class="page-link" href="#">3</a></li>
+	    <li class="page-item">
+	      <a class="page-link" href="#">Next</a>
+	    </li>
+	  </ul>
+	</nav>
+	</br>
 
 	<footer class="footer ml-5 p-3">
 		<div class="row">
