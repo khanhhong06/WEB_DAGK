@@ -1,0 +1,28 @@
+{
+  "name": "web_dagk",
+  "version": "1.0.0",
+  "description": "Đồ án giữa kỳ môn Web năm học 2019 - 2020",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khanhhong06/WEB_DAGK.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/khanhhong06/WEB_DAGK/issues"
+  },
+  "homepage": "https://github.com/khanhhong06/WEB_DAGK#readme",
+  "keywords": [],
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "express-handlebars": "^3.1.0",
+    "morgan": "^1.9.1",
+    "mysql": "^2.17.1"
+  }
+}
