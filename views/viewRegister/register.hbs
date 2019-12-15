@@ -1,0 +1,95 @@
+<div class="card mx-auto" style="width:40%; margin: 20px;">
+		<div class="card-header" style="font-size: 25px;">
+		    Register
+		</div>
+		<div class="card-body">
+			<form name="myForm" method="post" onsubmit="return validateCoreRegister();">
+			  	<div class="form-group">
+				    <label for="exampleInputEmail1">Email address</label>
+				    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="example@email.com" name="email">
+				    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+			  	</div>
+			  	<div class="form-group">
+				    <label>First name</label>
+				    <input type="text" class="form-control" placeholder="First name" name="firstname">
+			  	</div>
+			  	<div class="form-group">
+				    <label>Last name</label>
+				    <input type="text" class="form-control" placeholder="Last name" name="lastname">
+			  	</div>
+		  		<div class="form-group">
+				    <label>Number phone</label>
+				    <input type="text" class="form-control" placeholder="09xxxxxxxx" name="phone">
+			  	</div>
+			  	<div class="form-group">
+				    <label>Address</label>
+				    <input type="text" class="form-control" placeholder="Address" name="address">
+			  	</div>
+			  	<div class="form-group">
+				    <label for="exampleInputPassword1">Password</label>
+				    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="pass">
+				    <small id="passwordHelpInline" class="text-muted">Must be 8-20 characters long.
+		    		</small>
+			  	</div>
+			  	<div class="form-group">
+				    <label for="exampleInputPassword1">Confirm password</label>
+				    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Confirm password" name="conpass">
+			  	</div>
+			  	<script type="text/javascript">
+			  		function validateCoreRegister(){
+			  			var x = document.forms[myForm][email].value;
+			  			var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            var res= re.test(String(y).toLowerCase());
+			  			if (x==""){
+			  				alert("Please enter your email!");
+			  				return false;
+			  			}
+			  			else if (res == false){
+			  				alert("Please enter your email again!");
+			  				return false;
+			  			}
+
+			  			var y = document.forms[myForm][firstname].value;
+			  			if (y==""){
+			  				alert("Please enter your first name!");
+			  				return false;
+			  			}
+
+			  			var z = document.forms[myForm][lastname].value;
+			  			if (z==""){
+			  				alert("Please enter your last name!");
+			  				return false;
+			  			}
+
+			  			var t = document.forms[myForm][address].value;
+			  			if (t==""){
+			  				alert("Please enter your address!");
+			  				return false;
+			  			}
+
+			  			var u = document.forms[myForm][phone].value;
+			  			var utest = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+			  			var ures = utest.test(String(u).toLowerCase());
+			  			if (u==""){
+			  				alert("Please enter your phone number!");
+			  				return false;
+			  			}
+			  			else if (ures==false){
+			  				alert("Please enter your phone number again!");
+			  				return false;
+			  			}
+
+			  			var p = document.forms[myForm][pass].value;
+			  			var cp = document.forms[myForm][conpass].value;
+			  			if (cp!=p){
+			  				alert("Please confirm password again!");
+			  				return false;
+			  			}
+
+			  			return true;
+			  		}
+			  	</script>
+			  	<button type="submit" class="btn btn-secondary">Submit</button>
+			</form>
+		</div>
+</div>

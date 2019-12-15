@@ -18,25 +18,19 @@ app.engine('hbs', exphbs({
 
 app.set('view engine','hbs');
 
-//app.get('/', (req, res) => {
-   // res.render('./wwCategories/index');
-//})
-
 app.get('/about', (req , res) => {
     res.render('about');
 })
 
 app.get('/register',(req,res)=>{
-    res.render('register');
+    res.render('viewRegister/register');
 })
 //app.use('/admin/categories',require('./routes/admin/category.route'));
 
 app.use('/',require('./routes/admin/home.route'));
 
 
-app.get('/products', (req,res) => {
-    res.render('viewProducts/products');
-})
+app.use('/products', require('./routes/admin/products.route'));
 
 
 app.use((req, res, next) => {
