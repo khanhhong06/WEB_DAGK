@@ -5,11 +5,15 @@ const router = express.Router();
 
 router.get('/', async(req, res) => {
     const rows = await productsModel.all();
-    res.render('wwCategories/index', {
+    res.render('viewHome/index', {
         products: rows,
         empty: rows.length === 0
     });
 }) 
+
+//router.get('/products', (req,res) => {
+   // res.render('viewProducts/products');
+//})
 
 router.get('/err', (req, res) => {
 

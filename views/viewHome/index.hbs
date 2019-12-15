@@ -2,10 +2,9 @@
     <div class="container">
         <h1 class="display-4">Các sản phẩm đấu giá gần kết thúc</h1></br>
         <div class="good row" style="justify-content: center; justify-content: space-around;">
-            
+            {{#each this.products}}
             <div class="card shadow bg-white rounded" style="width: 13em;">
-                {{#each this.products}}
-                <img src="products_images/dtdd-Cellphone-intelligent-1.jpg" class="card-img-top" alt="...">
+                <img src={{linkImg}} class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{Name}}</h5>
                     <h6 class="card-text">Giá hiện tại: {{CurrPrice}}</h6>
@@ -18,25 +17,10 @@
                         <button type="button" class="btn btn-danger ml-3">Yêu thích</button>
                     </from>
                 </div>
-                {{/each}}
-            </div>
-            
+            </div>  
+            {{/each}}  
         </div>
-         <div class="card shadow bg-white rounded" style="width: 13em;">
-                <img src="https://salt.tikicdn.com/cache/w1200/ts/product/33/ad/c3/672fbef308ecc5b41240acb3bb92cd1e.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Laptop Dell Vostro 3480 70183778 i5-8265 4GB 1TB Win10 - Hàng chính hãng</h5>
-                    <h6 class="card-text">Giá hiện tại: 15.000.000 VND</h6>
-                    <h6 class="card-text">Bidder đặt giá cao nhất: Fei</h6>
-                    <h6 class="card-text">Ngày đăng: 07/11/2019</h6>
-                    <h6 class="card-text">Thời gian còn lại: 3 giờ</h6>
-                    <h6 class="card-text">Số lượt ra giá: 100000</h6>
-                    <form class="row" action="products_detail.html">
-                        <button type="submit" class="btn btn-secondary m-3">Chi tiết</button>
-                        <button type="button" class="btn btn-danger ml-3">Yêu thích</button>
-                    </from>
-                </div>
-            </div>
+         
     </div>
 
 
