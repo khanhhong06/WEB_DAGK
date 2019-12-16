@@ -1,0 +1,77 @@
+<div class="jumbotron jumbotron-fluid row" style="display: flex;justify-content: center;">
+    <div class="container">
+        <h1 class="display-4">Các sản phẩm đấu giá gần kết thúc</h1></br>
+        <div class="good row" style="justify-content: center; justify-content: space-around;">
+            {{#each this.products}}
+            <div class="card shadow bg-white rounded" style="width: 13em;">
+                <img src={{linkImg}} class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{Name}}</h5>
+                    <h6 class="card-text">Giá hiện tại: {{CurrPrice}}</h6>
+                    <h6 class="card-text">Bidder đặt giá cao nhất: Yang</h6>
+                    <h6 class="card-text">Ngày đăng: {{PostedTime}}</h6>
+                    <h6 class="card-text">Ngày kết thúc: {{EndTime}}</h6>
+                    <h6 class="card-text">Số lượt ra giá: </h6>
+                    <form class="row" action="products_detail.html">
+                        <button type="submit" class="btn btn-secondary m-3">Chi tiết</button>
+                        <button type="button" class="btn btn-danger ml-3">Yêu thích</button>
+                    </from>
+                </div>
+            </div>  
+            {{/each}}  
+        </div>
+         
+    </div>
+
+
+    <div class="container m-2">
+        <h1 class="display-4">Các sản phẩm có nhiều lượt đấu giá nhất</h1></br>
+        <div class="good row" style="justify-content: center; justify-content: space-around;">
+            <div class="good row" style="justify-content: center; justify-content: space-around;">
+            {{#each this.products}}
+            <div class="card shadow bg-white rounded" style="width: 13em;">
+                <img src={{linkImg}} class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{Name}}</h5>
+                    <h6 class="card-text">Giá hiện tại: {{CurrPrice}}</h6>
+                    <h6 class="card-text">Bidder đặt giá cao nhất: Yang</h6>
+                    <h6 class="card-text">Ngày đăng: {{PostedTime}}</h6>
+                    <h6 class="card-text">Ngày kết thúc: {{EndTime}}</h6>
+                    <h6 class="card-text">Số lượt ra giá: </h6>
+                    <form class="row" action="products_detail.html">
+                        <button type="submit" class="btn btn-secondary m-3">Chi tiết</button>
+                        <button type="button" class="btn btn-danger ml-3">Yêu thích</button>
+                    </from>
+                </div>
+            </div>  
+            {{/each}}  
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container m-2">
+        <h1 class="display-4">Các sản phẩm có giá đấu giá cao nhất</h1></br>
+        <div class="good row" style="justify-content: center; justify-content: space-around;">
+            <div class="good row" style="justify-content: center; justify-content: space-around;">
+            {{#each this.products}}
+            <div class="card shadow bg-white rounded" style="width: 13em;">
+                <img src={{linkImg}} class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{Name}}</h5>
+                    <h6 class="card-text">Giá hiện tại: {{CurrPrice}}</h6>
+                    <h6 class="card-text">Bidder đặt giá cao nhất: Yang</h6>
+                    <h6 class="card-text">Ngày đăng: {{PostedTime}}</h6>
+                    <h6 class="card-text">Ngày kết thúc: {{EndTime}}</h6>
+                    <h6 class="card-text">Số lượt ra giá: </h6>
+                    <form class="row" action="products_detail.html">
+                        <button type="submit" class="btn btn-secondary m-3">Chi tiết</button>
+                        <button type="button" class="btn btn-danger ml-3">Yêu thích</button>
+                    </from>
+                </div>
+            </div>  
+            {{/each}}  
+            </div>
+        </div>
+    </div>
+</div>
