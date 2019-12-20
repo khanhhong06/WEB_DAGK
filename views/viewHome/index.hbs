@@ -4,18 +4,18 @@
         <div class="good row" style="justify-content: center; justify-content: space-around;">
             {{#each this.products}}
             <div class="card shadow bg-white rounded" style="width: 13em;">
-                <img src="/public/images/{{id}}/{{id}}-2.jpg" class="card-img-top" alt="{{ten_sp}}" title="{{ten_sp}}" >
+                <img src="/images/{{id}}/main.jpg" class="card-img-top" alt="{{ten_sp}}" title="{{ten_sp}}" >
                 <div class="card-body">
                     <h5 class="card-title">{{ten_sp}}</h5>
-                    <h6 class="card-text">Giá hiện tại: {{gia_hien_tai}} VND</h6>
+                    <h6 class="card-text">Giá hiện tại: {{format gia_hien_tai}}</h6>
                     <h6 class="card-text">Bidder đặt giá cao nhất: Yang</h6>
                     <h6 class="card-text">Ngày đăng: {{ngay_dang}}</h6>
                     <h6 class="card-text">Ngày kết thúc: {{ngay_het_han}}</h6>
                     <h6 class="card-text">Số lượt ra giá: </h6>
-                    <form class="row" action="products_detail.html">
-                        <button type="submit" class="btn btn-secondary m-3">Chi tiết</button>
-                        <button type="button" class="btn btn-danger ml-3">Yêu thích</button>
-                    </from>
+                    <div class="row">
+                        <a href="/{{id}}/detailproduct" class="btn btn-secondary" role="button" aria-pressed="true">Chi tiết</a>
+                        <button type="button" class="btn btn-danger">Yêu thích</button>
+                    </div>
                 </div>
             </div>  
             {{/each}}  
@@ -30,18 +30,18 @@
             <div class="good row" style="justify-content: center; justify-content: space-around;">
             {{#each this.products}}
             <div class="card shadow bg-white rounded" style="width: 13em;">
-                <img src={{linkImg}} class="card-img-top" alt="...">
+                <img src="/images/{{id}}/main.jpg" class="card-img-top" alt={{ten_sp}}>
                 <div class="card-body">
-                    <h5 class="card-title">{{Name}}</h5>
-                    <h6 class="card-text">Giá hiện tại: {{CurrPrice}}</h6>
+                    <h5 class="card-title">{{ten_sp}}</h5>
+                    <h6 class="card-text">Giá hiện tại: {{format gia_hien_tai}}</h6>
                     <h6 class="card-text">Bidder đặt giá cao nhất: Yang</h6>
-                    <h6 class="card-text">Ngày đăng: {{PostedTime}}</h6>
-                    <h6 class="card-text">Ngày kết thúc: {{EndTime}}</h6>
+                    <h6 class="card-text">Ngày đăng: {{ngay_dang}}</h6>
+                    <h6 class="card-text">Ngày kết thúc: {{ngay_het_han}}</h6>
                     <h6 class="card-text">Số lượt ra giá: </h6>
-                    <form class="row" action="products_detail.html">
-                        <button type="submit" class="btn btn-secondary m-3">Chi tiết</button>
-                        <button type="button" class="btn btn-danger ml-3">Yêu thích</button>
-                    </from>
+                    <div class="row">
+                        <a href="/{{id}}/detailproduct" class="btn btn-secondary" role="button" aria-pressed="true">Chi tiết</a>
+                        <button type="button" class="btn btn-danger">Yêu thích</button>
+                    </div>
                 </div>
             </div>  
             {{/each}}  
@@ -56,18 +56,18 @@
             <div class="good row" style="justify-content: center; justify-content: space-around;">
             {{#each this.products}}
             <div class="card shadow bg-white rounded" style="width: 13em;">
-                <img src={{linkImg}} class="card-img-top" alt="...">
+                <img src="/images/{{id}}/main.jpg" class="card-img-top" alt={{ten_sp}}>
                 <div class="card-body">
-                    <h5 class="card-title">{{Name}}</h5>
-                    <h6 class="card-text">Giá hiện tại: {{CurrPrice}}</h6>
+                    <h5 class="card-title">{{ten_sp}}</h5>
+                    <h6 class="card-text">Giá hiện tại: {{format gia_hien_tai}}</h6>
                     <h6 class="card-text">Bidder đặt giá cao nhất: Yang</h6>
-                    <h6 class="card-text">Ngày đăng: {{PostedTime}}</h6>
-                    <h6 class="card-text">Ngày kết thúc: {{EndTime}}</h6>
+                    <h6 class="card-text">Ngày đăng: {{ngay_dang}}</h6>
+                    <h6 class="card-text">Ngày kết thúc: {{ngay_het_han}}</h6>
                     <h6 class="card-text">Số lượt ra giá: </h6>
-                    <form class="row" action="products_detail.html">
-                        <button type="submit" class="btn btn-secondary m-3">Chi tiết</button>
-                        <button type="button" class="btn btn-danger ml-3">Yêu thích</button>
-                    </from>
+                    <div class="row">
+                        <a href="/{{id}}/detailproduct" class="btn btn-secondary" role="button" aria-pressed="true">Chi tiết</a>
+                        <button type="button" class="btn btn-danger">Yêu thích</button>
+                    </div>
                 </div>
             </div>  
             {{/each}}  

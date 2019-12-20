@@ -1,28 +1,29 @@
 <div class="col-lg-9 col-centered mt-4">
+    {{#each this.products}}
         <div class="row no-gutters">
             <div class="col-md-4">
-                <img src="products_images/dtdd-Cellphone-intelligent-1.jpg" alt="..." style="width: 300px; height: 300px;">
+                <img src="/images/{{id}}/main.jpg" alt={{id}} style="width: 300px; height: 300px;">
                 <ul class="row" style="list-style: none; margin-top:5px; padding:0; margin-left: 0;">
-                    <li><img src="products_images/dtdd-Cellphone-intelligent-2.jpg" alt="..." style="width: 100px; height:100px; padding-right: 5px;"></li>
-                    <li><img src="products_images/dtdd-Cellphone-intelligent-3.jpg" alt="..." style="width: 100px; height:100px; padding-right: 5px"></li>
-                    <li><img src="http://placehold.it/100x100" alt="..." style="width: 100px; height:100px;"></li>
+                    <li><img src="/images/{{id}}/{{id}}-2.jpg" alt="..." style="width: 100px; height:100px; padding-right: 5px;"></li>
+                    <li><img src="/images/{{id}}/{{id}}-3.jpg" alt="..." style="width: 100px; height:100px; padding-right: 5px"></li>
+                    <li><img src="/images/{{id}}/{{id}}-4.jpg" alt="..." style="width: 100px; height:100px;"></li>
                 </ul>
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h3 class="card-title">Điện Thoại Di Động VOLTE 1GB 32GB (4.7 Inch)</h3>
-                    <h4 class="mb-0">Giá hiện tại: 2.590.000đ</h4>
-                    <h4 class="mb-0">Giá mua ngay: 2.000.000 VND</h4>
-                    <small class="text-muted">Người bán: ABCDEF</small>
+                    <h3 class="card-title">{{ten_sp}}</h3>
+                    <h4 class="mb-0">Giá hiện tại: {{format gia_hien_tai}}</h4>
+                    <h4 class="mb-0">Giá khởi điệm: {{format gia_khoi_diem}}</h4>
+                    <small class="text-muted">Người bán: {{nguoi_ban_id}}</small>
                     <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
                     4.0 stars
                     <br>
-                    <small class="text-muted">Ngày đăng: 07/11/2019</small>
+                    <small class="text-muted">Ngày đăng: {{ngay_dang}}</small>
                     <br>
-                    <small class="text-muted">Thời điểm kết thúc: 23h00 24/11/2019</small>
+                    <small class="text-muted">Thời điểm kết thúc: {{ngay_het_han}}</small>
                     <br>
                     <p class="card-text mt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!</p>
-                    <small class="text-muted">Bidder ra giá cao nhất: Johny English</small>
+                    <small class="text-muted">Bidder ra giá cao nhất: </small>
                     <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
                     4.0 stars
                     <form class="form-inline">
@@ -96,6 +97,7 @@
                 </div>
             </div>
         </div>
+    {{/each}}
         <div class="card card-outline-secondary my-4">
             <div class="card-header">
                 Sản phẩm tương tự

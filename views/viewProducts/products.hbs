@@ -7,33 +7,35 @@
 	<div class="row" style="background-color:#F1F2F2;">
 		{{#each this.products}}
             <div class="card shadow bg-white rounded m-1" style="width: 13em;">
-                <img src="/public/images/1/main_thumbs.jpg" class="card-img-top" alt="...">
+                <img src="/images/{{id}}/main.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{ten_sp}}</h5>
-                    <h6 class="card-text">Giá hiện tại: {{gia_hien_tai}} VND</h6>
+                    <h6 class="card-text">Giá hiện tại: {{format gia_hien_tai}}</h6>
                     <h6 class="card-text">Bidder đặt giá cao nhất: Yang</h6>
                     <h6 class="card-text">Ngày đăng: {{ngay_dang}}</h6>
                     <h6 class="card-text">Ngày kết thúc: {{ngay_ket_thuc}}</h6>
                     <h6 class="card-text">Số lượt ra giá: </h6>
-                    <form class="row" action="products_detail.html">
-                        <button type="submit" class="btn btn-secondary m-3">Chi tiết</button>
-                        <button type="button" class="btn btn-danger ml-3">Yêu thích</button>
-                    </from>
+                    <div class="row">
+                        <a href="/{{id}}/detailproduct" class="btn btn-secondary" role="button" aria-pressed="true">Chi tiết</a>
+                        <button type="button" class="btn btn-danger">Yêu thích</button>
+                    </div>
                 </div>
             </div>  
         {{/each}}  
 	</div>
 	<nav aria-label="Page navigation example">
 		 	<ul class="pagination justify-content-center">
-		   		<li class="page-item disabled">
-		     		<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-		   		</li>
-		   		<li class="page-item"><a class="page-link" href="#">1</a></li>
-		   		<li class="page-item"><a class="page-link" href="products.html">2</a></li>
-		   		<li class="page-item"><a class="page-link" href="#">3</a></li>
+		   		{{#each this.page_numbers}}   
+				{{#if isCurrentPage}}
+		   		<li class="page-item active" aria-current="page">
+					   <a class="page-link" href="javascript:;">{{value}} <span class="sr-only">(current)</span> </a>
+				</li>
+		   		{{else}}
 		   		<li class="page-item">
-		     		<a class="page-link" href="#">Next</a>
+		     		<a class="page-link" href="?page={{value}}">{{value}}</a>
 		   		</li>
+				{{/if}}
+				{{/each}}
 		 	</ul>
 	</nav>
 	{{/if}}
