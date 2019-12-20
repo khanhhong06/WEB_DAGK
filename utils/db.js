@@ -7,7 +7,7 @@ const pool = mysql.createPool({
     port: 3306,
     user: 'root',
     password: '',
-    database: 'onlineauction'
+    database: 'qldaugia'
 });
 
 const mysql_query = utils.promisify(pool.query).bind(pool);

@@ -102,10 +102,11 @@
     <ul class="nav nav-pills navbar navbar-light bg-light">
         <li>
             <div class="dropdown" style="margin-left: 50%">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Điện tử</button>
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Danh mục</button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="/products">Điện thoại di động</a>
-                    <a class="dropdown-item" href="/products">Máy tính xách tay</a>
+                    {{#each lcCategories}}
+                    <a class="dropdown-item" href="/{{id_loai}}/products">{{ten_loai}}</a>
+                    {{/each}}
                 </div>
             </div>
         </li>

@@ -27,11 +27,11 @@ app.get('/register',(req,res)=>{
 })
 //app.use('/admin/categories',require('./routes/admin/category.route'));
 
-app.use('/',require('./routes/admin/home.route'));
+//app.use('/',require('./routes/home.route'));
 
 
-app.use('/products', require('./routes/admin/products.route'));
-
+require('./middlewares/locals.mdw')(app);
+require('./middlewares/routes.mdw')(app);
 
 app.use((req, res, next) => {
     // res.render('vwError/404');

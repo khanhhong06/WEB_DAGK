@@ -1,0 +1,7 @@
+module.exports = function (app) {
+    app.use('/', require('../routes/home.route'));
+    //app.use('/',require('../routes/products.route'));
+    //app.use('/admin/categories', require('../routes/admin/category.route'));
+  };
+  
+  
