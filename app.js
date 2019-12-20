@@ -1,6 +1,7 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const morgan = require('morgan');
+const numeral = require('numeral');
 require('express-async-errors');
 
 const app = express();
@@ -11,9 +12,14 @@ app.use(express.urlencoded({
   extended: true
 }));
 
+app.use(express.static('public')); 
+
 app.engine('hbs', exphbs({
     defaultLayout : 'main.hbs',
-    layoutsDir : 'views/layouts'
+    layoutsDir : 'views/layouts',
+    helpers: {
+        format: val => numeral(val).format('0,0')
+    }
 }));
 
 app.set('view engine','hbs');
@@ -25,16 +31,13 @@ app.get('/about', (req , res) => {
 app.get('/register',(req,res)=>{
     res.render('viewRegister/register');
 })
-//app.use('/admin/categories',require('./routes/admin/category.route'));
-
-//app.use('/',require('./routes/home.route'));
 
 
 require('./middlewares/locals.mdw')(app);
+require('./middlewares/details.mdw')(app);
 require('./middlewares/routes.mdw')(app);
 
 app.use((req, res, next) => {
-    // res.render('vwError/404');
     res.send('You\'re lost');
 })
   
