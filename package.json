@@ -24,10 +24,7 @@
     "express-handlebars": "^3.1.0",
     "morgan": "^1.9.1",
     "mysql": "^2.17.1",
-<<<<<<< HEAD
-    "save": "^2.4.0"
-=======
+    "save": "^2.4.0",
     "numeral": "^2.0.6"
->>>>>>> 78a262e9ae2dff8677fd1fe16212b6dcab354fbd
   }
 }
