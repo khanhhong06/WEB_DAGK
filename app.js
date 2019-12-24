@@ -2,6 +2,7 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const morgan = require('morgan');
 const numeral = require('numeral');
+const hbs_sections = require('express-handlebars-sections');
 require('express-async-errors');
 
 const app = express();
@@ -18,7 +19,8 @@ app.engine('hbs', exphbs({
     defaultLayout : 'main.hbs',
     layoutsDir : 'views/layouts',
     helpers: {
-        format: val => numeral(val).format('0,0')
+        format: val => numeral(val).format('0,0'),
+        section: hbs_sections(),
     }
 }));
 
@@ -28,13 +30,7 @@ app.get('/about', (req , res) => {
     res.render('about');
 })
 
-app.get('/register',(req,res)=>{
-    res.render('viewRegister/register');
-})
-
-
 require('./middlewares/locals.mdw')(app);
-require('./middlewares/details.mdw')(app);
 require('./middlewares/routes.mdw')(app);
 
 app.use((req, res, next) => {
