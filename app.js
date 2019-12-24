@@ -3,6 +3,7 @@ const exphbs = require('express-handlebars');
 const morgan = require('morgan');
 const numeral = require('numeral');
 const hbs_sections = require('express-handlebars-sections');
+const session = require('express-session');
 require('express-async-errors');
 
 const app = express();
@@ -12,6 +13,15 @@ app.use(express.json());
 app.use(express.urlencoded({
   extended: true
 }));
+
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  // cookie: {
+  //     secure: true
+  // }
+}))
 
 app.use(express.static('public')); 
 
