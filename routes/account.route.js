@@ -17,7 +17,11 @@ router.post('/register', async(req, res) => {
 
     const entity = req.body;
 
-    console.log(entity);
+
+    //xử lý tài khoản có tồn tại hay chưa
+
+
+    //console.log(entity);
 
     entity.mat_khau = hash;
     entity.quyen_han = 0; //nguoi dung binh thuong (bidder)

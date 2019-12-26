@@ -4,7 +4,7 @@ const config = require('../config/default.json');
 module.exports = {
     all: () => db.load('select * from san_pham'),
     single: id => db.load(`select * from san_pham where id = ${id}`),
-    allByCat: id_loai => db.load(`select * from san_pham where chung_loai = ${id_loai}`),
+    allByCat: id_loai => db.load(`select * from san_pham where chung_loai = '${id_loai}'`),
     countByCat: async id_loai => {
         const rows = await db.load(`select count(*) as total from san_pham where chung_loai = ${id_loai}`)
         return rows[0].total;

@@ -1,24 +1,25 @@
 {{#section 'css'}}
-<link rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+<link rel="stylesheet" href="jquery.datetimepicker.min.css" />
 {{/section}}
 
 {{#section 'js'}}
   <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+    src="jquery.datetimepicker.full.min.js"></script>
+  
   <script>
     $('#txtDOB').datetimepicker({
-      // format: 'd/m/Y H:i'
-      format: 'd/m/Y',
       timepicker: false,
-      mask: true,
+      datetimepicker: true,
+      format: 'd/m/Y',
+      value: '1/1/2019'
     });
 
-    function validate() {
+    function validate() { //kiểm tra hợp lệ thông tin
       return true;
     }
   </script>
 {{/section}}
+
 <div class="card shadow mb-4">
   <h4 class="card-header">
     Đăng ký thành viên
@@ -59,7 +60,7 @@
           </div>
       </div>
 
-      <button type="submit" class="btn btn-outline-success" data-toggle="modal" data-target=".bd-example-modal-sm">
+      <button type="submit" class="btn btn-outline-success" data-toggle="modal" data-target="bd-example-modal-sm">
         <i class="fa fa-check" aria-hidden="true"></i>
         Xác nhận
       </button>

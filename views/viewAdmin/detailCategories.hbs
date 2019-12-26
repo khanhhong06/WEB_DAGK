@@ -1,4 +1,60 @@
-<div class="col-lg-9 col-centered mt-4">
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Example App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" role="navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/" style="font-size: 20px">ONLINE AUNCTION</a>
+            <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
+                
+            </button>
+            <div class="collapse navbar-collapse" id="exCollapsingNavbar">
+
+                <form id="frmLogout" method="post" action="/account/logout"></form>
+                <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
+                    <li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i class="fa fa-cog fa-fw fa-lg"></i></a></li>
+                    {{#if isAuthenticated}}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Hi, <b>{{authUser.ten_dang_nhap}}!</b>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/account/profile">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            Profile
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="javascript: $('#frmLogout').submit();">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>
+                            Logout
+                            </a>
+                        </div>
+                    </li>
+                    {{else}}
+                    <li class="dropdown order-1 row">
+                        <a class="btn btn-dark" href="/account/register" role="button">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                            Đăng ký
+                        </a>
+                        <a class="btn btn-success" href="/account/login" role="button">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                            Đăng nhập
+                        </a>
+                    </li>
+                    {{/if}}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <br>
+    
+    <div class="container m-4">
     {{#each this.products}}
         <div class="row no-gutters">
             <div class="col-md-4">
@@ -27,23 +83,6 @@
                     4.0 stars
                     <p class="card-text mt-3">Kích cỡ: {{kich_co}}</p>
                     <p class="card-text mt-3">Trọng lượng: {{trong_luong}}</p>
-                    <form class="form-inline">
-                        <div class="form-group mb-2">
-                            <label for="bidPrice" class="sr-only">Bid Price</label>
-                            <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Bid Price:">
-                        </div>
-                        <div class="form-group mx-sm-3 mb-2">
-                            <label for="inputPassword2" class="sr-only"></label>
-                            <input type="text" class="form-control" placeholder="Higher than current price" style="width: 300px">
-                        </div>
-                        <button type="submit" class="btn btn-secondary mb-2">Bid</button>
-                    </form>
-                    <form method="POST">
-                        <button type="submit" class="btn btn-outline-danger">
-                            <i class="fa fa-check" aria-hidden="true"></i>
-                            Yêu thích
-                        </button>
-                    </form>
                 </div>
             </div>
         </div>
@@ -103,52 +142,17 @@
                 </div>
             </div>
         </div>
-    {{/each}}
-        <div class="card card-outline-secondary my-4">
-            <div class="card-header">
-                Sản phẩm tương tự
-            </div>
-            <div class="card-body row m-1" style="display: flex;justify-content: center;">
-                <div class="card" style="width: 13rem;">
-                    <img src="https://salt.tikicdn.com/cache/w1200/ts/product/ec/66/e5/84cbbcf94635a96293b851e31a73b08e.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Điện Thoại Oneplus 6T (8Gb + 128Gb)</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-secondary">Chi tiết</a>
-                    </div>
-                </div>
-                <div class="card" style="width: 13rem;">
-                    <img src="https://salt.tikicdn.com/cache/w1200/ts/product/fa/96/62/2772c85bc385cb8c7d10372971f5d7a1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Điện Thại Samsung Galaxy J2 Pro 16GB - Quốc Tế - Đen</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-secondary">Chi tiết</a>
-                    </div>
-                </div>
-                <div class="card" style="width: 13rem;">
-                    <img src="https://salt.tikicdn.com/cache/w1200/ts/product/9f/72/b8/64c4c6c53dd222486e7e737bdd3b348c.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Điện Thoại Samsung Galaxy J7 Plus 32GB - Quốc Tế - Đen</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-secondary">Chi tiết</a>
-                    </div>
-                </div>
-                <div class="card" style="width: 13rem;">
-                    <img src="https://salt.tikicdn.com/cache/w1200/ts/product/c6/f5/29/6f5f3f0962fd0a60cfe249fabfcfe770.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Điện Thại Samsung Galaxy J2 Pro SM-J250G/DS 1.5GB/16GB 5.0-inches Dual SIM - Quốc Tế - Hồng</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-secondary">Chi tiết</a>
-                    </div>
-                </div>
-                <div class="card" style="width: 13rem;">
-                    <img src="https://salt.tikicdn.com/cache/w1200/ts/product/55/9b/e0/6f525379d486033eb4386d7c6bbd3c1c.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Điện Thoại Samsung Galaxy J2 Prime (SM-G532G/DS) 1.5GB / 8GB Hai SIM Unlocked - Bản Quốc Tế ( GOLD)</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-secondary">Chi tiết</a>
-                    </div>
-                </div>
-            </div>
+    
+        <div class="row mx-2">
+            <a href="/admin/categories/" class="btn btn-outline-primary m-1">Cập nhật</a>
+            <a href="/admin/categories/del/{{id}}" class="btn btn-outline-danger m-1">Xóa</a>
         </div>
-</div>
+    {{/each}}
+    </div>
+    
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,29 +1,11 @@
 const express = require('express');
+const yeuthichModel = require('../models/yeuthich.model');
 const productsModel = require('../models/sanpham.model');
 
 const router_Products = express.Router();
 
-// xem ds sản phẩm thuộc danh mục :id
-/*
-router_Products.get('/:id/products', async (req, res) => {
-
-  for (const c of res.locals.lcCategories) {
-    console.log(c);
-    if (c.id_loai === +req.params.id) {
-      c.isActive = true;
-    }
-  }
-
-  const rows = await productsModel.allByCat(req.params.id);
-  res.render('viewProducts/products', {
-    products: rows,
-    empty: rows.length === 0
-  });
-})
-
-// xem chi tiet tung san pham theo id san pham
-
-router_Products.get('/:id/detail_product', async(req,res) => {
+router_Products.get('/:id/detailproduct', async(req,res) => {
+  //console.log(req.params.id);
 
   const rows = await productsModel.single(req.params.id);
   res.render('viewProducts/products_detail', {
@@ -31,7 +13,34 @@ router_Products.get('/:id/detail_product', async(req,res) => {
     empty: rows.length === 0
   })
 })
-*/
+
+//xu ly nhan button 'Yeu Thich' van chua duoc
+
+router_Products.post('/:id/detailproduct', async (req, res) => {
+   const status =  req.session.isAuthenticated;
+
+    console.log(status);
+
+   if (status === false) {
+     return res.render('viewAccount/login');
+   }
+   // true 
+   const user =  req.session.authUser.id;
+
+   console.log(user);
+
+   const product = req.params.id; 
+
+   console.log(product);
+
+   const entity = {user, product};
+
+   console.log(entity);
+
+   const result = await yeuthichModel.add(entity);
+   res.redirect(req.headers.referer);
+})
+
 router_Products.get('/err', (req, res) => {
 
     throw new Error('error occured');
