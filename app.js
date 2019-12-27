@@ -5,6 +5,7 @@ const numeral = require('numeral');
 const hbs_sections = require('express-handlebars-sections');
 const session = require('express-session');
 require('express-async-errors');
+const config = require('./config/default.json');
 
 const app = express();
 
@@ -52,7 +53,7 @@ app.use((err,req,res,next)=>{
     res.status(500).send('View error on console');
 })
 
-const PORT = 8000;
+const PORT = config.host.port;
 
 app.listen(PORT, () =>{
     console.log(`Server is running at http://localhost:${PORT}`);

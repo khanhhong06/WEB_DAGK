@@ -71,8 +71,8 @@ router.post('/logout', (req, res) => {
     res.redirect(req.headers.referer);
 });
 
-router.get('/profile', restrict, async (req, res) => {
-    const rows = await nguoidungModel.all();
+router.get('/profile/:id_user', restrict, async (req, res) => {
+    const rows = await nguoidungModel.single(req.params.id_user);
     res.render('viewAccount/profile', {
         user: rows,
         empty: rows.length === 0

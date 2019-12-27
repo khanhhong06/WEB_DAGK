@@ -5,9 +5,12 @@
       "port": 3306,
       "user": "root",
       "password": "",
-      "database": "qldg"
+      "database": "qldg-new"
     },
     "paginate": {
       "limit": 5
+    },
+    "host":{
+      "port": 8000
     }
   }

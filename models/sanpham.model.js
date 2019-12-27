@@ -13,8 +13,8 @@ module.exports = {
     add: entity =>db.add('san_pham', entity),
     del: id => db.del('san_pham',{ID: id}),
     patch: entity => {
-        const condition = { ID: entity.ID};
-        delete entity.ID;
+        const condition = { ID: entity.id};
+        delete entity.id;
         return db.patch('san_pham',entity,condition);
-    }
+    },
 }
