@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const moment = require('moment');
 const nguoidungModel = require('../models/nguoidung.model');
 const restrict = require('../middlewares/auth.mdw');
+const { check, validationResult } = require('express-validator');
 
 const router = express.Router();
 
@@ -10,16 +11,44 @@ router.get('/register', async(req,res) => {
     res.render('viewAccount/register');
 });
 
-router.post('/register', async(req, res) => {
+router.post('/register',[
+    check('email').isEmail().withMessage("Invalid Email")
+], async(req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() });
+    }
+
+    //Kiểm tra rỗng
+    if(req.body.ten_dang_nhap == "" || req.body.raw_password == "" || req.body.ten == "")
+    {
+        throw new Error('Fill all the information');
+        return;
+    }
+
     const N = 10;
     const hash = bcrypt.hashSync(req.body.raw_password,N);
-    const dob = moment(req.body.dob, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    var dob = moment(req.body.dob,'DD/MM/YYYY')
+    //Kiem tra ngày tháng hợp lệ
+    if(!dob.isValid())
+    {
+        throw new Error('Invalid date of birth');
+        return;
+    }
 
     const entity = req.body;
 
 
     //xử lý tài khoản có tồn tại hay chưa
+    const user = await nguoidungModel.singleByUsername(req.body.ten_dang_nhap);
 
+    console.log(user);
+
+    if (user !== null)
+    {
+      throw new Error('Username already exists.');
+      return;
+    }
 
     //console.log(entity);
 
@@ -33,6 +62,7 @@ router.post('/register', async(req, res) => {
     delete entity.dob;
     
     const result = await nguoidungModel.add(entity);
+
     res.render('viewAccount/register');
 });
 
