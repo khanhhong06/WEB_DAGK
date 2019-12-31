@@ -17,4 +17,5 @@ module.exports = {
         delete entity.id;
         return db.patch('san_pham',entity,condition);
     },
+    maxID: () => db.load('select max(id) as max from san_pham')
 }
