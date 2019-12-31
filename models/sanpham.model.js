@@ -17,4 +17,5 @@ module.exports = {
         delete entity.id;
         return db.patch('san_pham',entity,condition);
     },
+    search:inputSearch=>db.load(`select * from san_pham where ten_sp like '%${inputSearch}%'`),
 }
