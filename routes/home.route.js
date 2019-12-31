@@ -14,6 +14,14 @@ router.get('/', async(req, res) => {
     });
 }) 
 
+router.post('/',async(req,res)=>{
+  const rows=await productsModel.search(req.body.inputSearch);
+  res.render('viewSearch/searchbody',{
+    products: rows,
+    empty: rows.length===0
+  });
+})
+
 // xem ds sản phẩm thuộc danh mục :id
 
 router.get('/:id_loai/products', async (req, res) => {
