@@ -3,7 +3,6 @@ const bcrypt = require('bcryptjs');
 const moment = require('moment');
 const nguoidungModel = require('../models/nguoidung.model');
 const restrict = require('../middlewares/auth.mdw');
-const { check, validationResult } = require('express-validator');
 
 const router = express.Router();
 
@@ -11,30 +10,11 @@ router.get('/register', async(req,res) => {
     res.render('viewAccount/register');
 });
 
-router.post('/register',[
-    check('email').isEmail().withMessage("Invalid Email")
-], async(req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(422).json({ errors: errors.array() });
-    }
-
-    //Kiểm tra rỗng
-    if(req.body.ten_dang_nhap == "" || req.body.raw_password == "" || req.body.ten == "")
-    {
-        throw new Error('Fill all the information');
-        return;
-    }
+router.post('/register', async(req, res) => {
 
     const N = 10;
     const hash = bcrypt.hashSync(req.body.raw_password,N);
-    var dob = moment(req.body.dob,'DD/MM/YYYY')
-    //Kiem tra ngày tháng hợp lệ
-    if(!dob.isValid())
-    {
-        throw new Error('Invalid date of birth');
-        return;
-    }
+    var dob = moment(req.body.dob,'DD/MM/YYYY').format('YYYY-MM-DD');
 
     const entity = req.body;
 
@@ -46,11 +26,12 @@ router.post('/register',[
 
     if (user !== null)
     {
-      throw new Error('Username already exists.');
-      return;
+      return res.render('viewAccount/register', {
+        err_message: 'User already exists'
+      });
     }
 
-    //console.log(entity);
+    console.log(entity);
 
     entity.mat_khau = hash;
     entity.quyen_han = 0; //nguoi dung binh thuong (bidder)
