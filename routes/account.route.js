@@ -11,7 +11,9 @@ router.get('/register', async(req,res) => {
     res.render('viewAccount/register');
 });
 
-router.post('/register',[
+router.post('/register', async (req, res)=> {
+
+/*[
     check('email').isEmail().withMessage("Invalid Email")
 ], async(req, res) => {
     const errors = validationResult(req);
@@ -35,35 +37,45 @@ router.post('/register',[
         throw new Error('Invalid date of birth');
         return;
     }
-
+*/
     const entity = req.body;
 
 
     //xử lý tài khoản có tồn tại hay chưa
     const user = await nguoidungModel.singleByUsername(req.body.ten_dang_nhap);
-
-    console.log(user);
-
     if (user !== null)
     {
-      throw new Error('Username already exists.');
-      return;
-    }
+        return res.render('viewAccount/register', {
+            err_message: 'Username already exists'
+          })
+    };
 
+    //xử lý email đã tồn tại
+    const email = await nguoidungModel.singleByEmail(req.body.email);
+    if (user !== null)
+    {
+        return res.render('viewAccount/register', {
+            err_message: 'Email already exists'
+          })
+    };
     //console.log(entity);
-
+    const N = 10;
+    const hash = bcrypt.hashSync(req.body.raw_password,N);
     entity.mat_khau = hash;
     entity.quyen_han = 0; //nguoi dung binh thuong (bidder)
+    const dob = moment(req.body.dob, 'DD/MM/YYYY').format('YYYY-MM-DD');
     entity.ngay_sinh = dob;
 
-    console.log(entity);
+    //console.log(entity);
 
     delete entity.raw_password;
     delete entity.dob;
     
     const result = await nguoidungModel.add(entity);
 
-    res.render('viewAccount/register');
+    res.render('viewAccount/register', {
+        err_message: 'Register successful'
+    });
 });
 
 router.get('/login', (req, res) => {
@@ -74,17 +86,12 @@ router.post('/login', async (req, res) => {
     const user = await nguoidungModel.singleByUsername(req.body.user);
 
     console.log(user);
-
-    if (user === null)
-      throw new Error('Invalid username or password.');
-
     console.log(req.body.raw_password);
 
-  
     const rs = bcrypt.compareSync(req.body.raw_password, user.mat_khau);
     if (rs === false)
       return res.render('viewAccount/login', {
-        err_message: 'Login failed'
+        err_message: 'Invalid username or password'
       });
   
     delete user.mat_khau;

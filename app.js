@@ -42,16 +42,6 @@ app.get('/about', (req , res) => {
     res.render('about');
 })
 
-app.post('/viewAcount/register', (req, res) => {
-    Register.create({
-      username: req.body.ten_dang_nhap,
-      password: req.body.raw_password,
-      ten: req.body.ten,
-      email: req.body.email,
-      dob: req.body.dob
-    }).then(register => res.json(register));
-  });
-
 require('./middlewares/locals.mdw')(app);
 require('./middlewares/routes.mdw')(app);
 

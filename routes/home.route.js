@@ -14,7 +14,7 @@ router.get('/', async(req, res) => {
     });
 }) 
 
-router.post('/',async(req,res)=>{
+router.post('/:string',async(req,res)=>{
   const rows=await productsModel.search(req.body.inputSearch);
   res.render('viewSearch/searchbody',{
     products: rows,

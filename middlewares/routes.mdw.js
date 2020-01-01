@@ -4,6 +4,7 @@ module.exports = function (app) {
     app.use('/products', require('../routes/products.route'));
     app.use('/admin', require('../routes/admin/admin.route'));
     app.use('/search',require('../routes/search.route'));
+    app.use('/favourite', require('../routes/favourite.route'));
   };
   
   
