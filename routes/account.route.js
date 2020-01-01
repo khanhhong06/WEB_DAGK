@@ -10,84 +10,38 @@ router.get('/register', async(req,res) => {
     res.render('viewAccount/register');
 });
 
-
-router.post('/register', async (req, res)=> {
-
-/*[
-    check('email').isEmail().withMessage("Invalid Email")
-], async(req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(422).json({ errors: errors.array() });
-    }
-
-    //Kiểm tra rỗng
-    if(req.body.ten_dang_nhap == "" || req.body.raw_password == "" || req.body.ten == "")
-    {
-        throw new Error('Fill all the information');
-        return;
-    }
-
-    const N = 10;
-    const hash = bcrypt.hashSync(req.body.raw_password,N);
-    var dob = moment(req.body.dob,'DD/MM/YYYY')
-    //Kiem tra ngày tháng hợp lệ
-    if(!dob.isValid())
-    {
-        throw new Error('Invalid date of birth');
-        return;
-    }
-*/
-
 router.post('/register', async(req, res) => {
-
     const N = 10;
     const hash = bcrypt.hashSync(req.body.raw_password,N);
     var dob = moment(req.body.dob,'DD/MM/YYYY').format('YYYY-MM-DD');
-
-
     const entity = req.body;
-
-
     //xử lý tài khoản có tồn tại hay chưa
     const user = await nguoidungModel.singleByUsername(req.body.ten_dang_nhap);
     if (user !== null)
     {
-
         return res.render('viewAccount/register', {
             err_message: 'Username already exists'
           })
     };
-
     //xử lý email đã tồn tại
     const email = await nguoidungModel.singleByEmail(req.body.email);
-    if (user !== null)
+    if (email !== null)
     {
         return res.render('viewAccount/register', {
             err_message: 'Email already exists'
           })
     };
-    //console.log(entity);
-    const N = 10;
-    const hash = bcrypt.hashSync(req.body.raw_password,N);
-
-      return res.render('viewAccount/register', {
-        err_message: 'User already exists'
-      });
-    }
 
     console.log(entity);
-
-
     entity.mat_khau = hash;
     entity.quyen_han = 0; //nguoi dung binh thuong (bidder)
-    const dob = moment(req.body.dob, 'DD/MM/YYYY').format('YYYY-MM-DD');
     entity.ngay_sinh = dob;
 
     //console.log(entity);
 
     delete entity.raw_password;
     delete entity.dob;
+    delete entity.raw_cf_password;
     
     const result = await nguoidungModel.add(entity);
 
@@ -118,7 +72,7 @@ router.post('/login', async (req, res) => {
   
     const url = req.query.retUrl || '/';
     res.redirect(url);
-})
+});
 
 router.post('/logout', (req, res) => {
     req.session.isAuthenticated = false;
@@ -134,6 +88,4 @@ router.get('/profile/:id_user', restrict, async (req, res) => {
     });
 });
   
-  
 module.exports = router;
-
