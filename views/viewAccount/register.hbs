@@ -1,26 +1,64 @@
 {{#section 'css'}}
-<link rel="stylesheet" href="jquery.datetimepicker.min.css" />
+<link rel = "stylesheet"
+ href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
 {{/section}}
 
 {{#section 'js'}}
   <script
-    src="jquery.datetimepicker.full.min.js"></script>
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
   
-  <script>
+  <script>    
     $('#txtDOB').datetimepicker({
       timepicker: false,
-      datetimepicker: true,
       format: 'd/m/Y',
-      value: '1/1/2019'
+      mask: true,
+      value: '1/1/2020'
     });
 
     function validate() { //kiểm tra hợp lệ thông tin
+      var UserName = document.forms["frmRegister"]["ten_dang_nhap"];
+      var PassWord = document.forms["frmRegister"]["raw_password"];
+      var cfPassword = document.forms["frmRegister"]["raw_cf_password"];
+      var Name = document.forms["frmRegister"]["ten"];
+      var Email = document.forms["frmRegister"]["email"];
+      var Dob = document.forms["frmRegister"]["dob"];
+
+      if( UserName.value == "" || PassWord.value == "" || cfPassword.value == "" 
+      || Name.value == "" || Email.value == "" || Dob.value == "")
+      {
+        alert("Please fill in all informations");
+        return false;
+      }
+
+      if(cfPassword.value != PassWord.value)
+      {
+        Email.style.borderColor = "black";
+        cfPassword.style.borderColor = "red";
+        return false;
+      }
+
+      var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      if(!Email.value.match(mailformat))
+      {
+        cfPassword.style.borderColor = "black";
+        Email.style.borderColor = "red";
+        return false;
+      }
+
       return true;
     }
   </script>
 {{/section}}
 
 <div class="card shadow mb-4">
+  {{#if err_message}}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          {{err_message}}
+        </div>
+  {{else}}
   <h4 class="card-header">
     Đăng ký thành viên
   </h4>
@@ -34,6 +72,7 @@
         </div>
     {{/if}}
     <form onsubmit="return validate();" method="POST" novalidate id="frmRegister" name="frmRegister">
+    <form onsubmit="return validate()" method="POST" novalidate id="frmRegister" name="frmRegister">
       <div class="row">
           <div class="m-2">
                 <h5 class="mb-3">Account</h5>
@@ -47,7 +86,7 @@
                 </div>
                 <div class="form-group">
                   <label for="txtConfirm">Confirm</label>
-                  <input type="password" class="form-control" id="txtConfirm">
+                  <input type="password" class="form-control" id="txtConfirm" name = "raw_cf_password">
                 </div>
           </div>
 
@@ -82,4 +121,5 @@
       </div>
     </form>
   </div>
+  {{/if}}
 </div>
