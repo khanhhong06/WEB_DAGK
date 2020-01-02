@@ -3,9 +3,20 @@
 {{/section}}
 
 {{#section 'js'}}
-    <script src="sweetalert2.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.28.2/sweetalert2.all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
-    <script src="sweetalert2.min.js"></script>
+
+    <script>
+        function customAlert(){
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Thêm vào yêu thích thành công',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+        }
+    </script>
 {{/section}}
 
 <div class="jumbotron jumbotron-fluid row" style="display: flex;justify-content: center;">
@@ -25,7 +36,7 @@
                     <h6 class="card-text">Số lượt ra giá: </h6>
                     <div class="row">
                         <a href="/{{id}}/detailproduct" class="btn btn-secondary" role="button" aria-pressed="true">Chi tiết</a>
-                        <button type="submit" class="btn btn-danger" formaction="/favourite/{{id}}">
+						<button type="submit" class="btn btn-danger" formaction="/favourite/{{id}}">
                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                             Yêu thích
                         </button>
@@ -40,6 +51,7 @@
 
     <div class="container m-2">
         <h1 class="display-4">Các sản phẩm có nhiều lượt đấu giá nhất</h1></br>
+        <form method="POST" >
         <div class="good row" style="justify-content: center; justify-content: space-around;">
             <div class="good row" style="justify-content: center; justify-content: space-around;">
             {{#each this.products}}
@@ -54,8 +66,9 @@
                     <h6 class="card-text">Số lượt ra giá: </h6>
                     <div class="row">
                         <a href="/{{id}}/detailproduct" class="btn btn-secondary" role="button" aria-pressed="true">Chi tiết</a>
-                        <button type="submit" class="btn btn-outline-danger" formaction="/favourite/{{id}}">
-                           Yêu thích 
+                        <button type="submit" class="btn btn-danger" formaction="/favourite/{{id}}">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            Yêu thích
                         </button>
                     </div>
                 </div>
@@ -63,11 +76,13 @@
             {{/each}}  
             </div>
         </div>
+        </form>
     </div>
 
 
     <div class="container m-2">
         <h1 class="display-4">Các sản phẩm có giá đấu giá cao nhất</h1></br>
+        <form method="POST" >
         <div class="good row" style="justify-content: center; justify-content: space-around;">
             <div class="good row" style="justify-content: center; justify-content: space-around;">
             {{#each this.products}}
@@ -82,8 +97,9 @@
                     <h6 class="card-text">Số lượt ra giá: </h6>
                     <div class="row">
                         <a href="/{{id}}/detailproduct" class="btn btn-secondary" role="button" aria-pressed="true">Chi tiết</a>
-                        <button type="submit" class="btn btn-outline-danger" formaction="/favourite/{{id}}">
-                           Yêu thích 
+                        <button type="submit" class="btn btn-danger" formaction="/favourite/{{id}}">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            Yêu thích
                         </button>
                     </div>
                 </div>
@@ -91,5 +107,6 @@
             {{/each}}  
             </div>
         </div>
+        </form>
     </div>
 </div>

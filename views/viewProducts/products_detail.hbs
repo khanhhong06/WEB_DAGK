@@ -1,5 +1,6 @@
 <div class="col-lg-9 col-centered mt-4">
     {{#each this.products}}
+    <form method="POST">
         <div class="row no-gutters">
             <div class="col-md-4">
                 <img src="/images/{{id}}/main.jpg" alt={{id}} style="width: 300px; height: 300px;">
@@ -38,15 +39,14 @@
                         </div>
                         <button type="submit" class="btn btn-secondary mb-2">Bid</button>
                     </form>
-                    <form method="POST">
-                        <button type="submit" class="btn btn-outline-danger">
-                            <i class="fa fa-check" aria-hidden="true"></i>
+                    <button type="submit"  class="btn btn-danger" formaction="/favourite/{{id}}">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
                             Yêu thích
-                        </button>
-                    </form>
+                    </button>
                 </div>
             </div>
         </div>
+    </form>
         <div class="card card-outline-secondary my-2">
             <div class="card-header">
                 Reviews sản phẩm

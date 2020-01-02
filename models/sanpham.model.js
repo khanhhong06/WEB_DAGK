@@ -22,7 +22,7 @@ module.exports = {
 
     search:inputSearch=>db.load(`select * from san_pham where ten_sp like '%${inputSearch}%'`),
     searchType:async(inputSearch,searchType)=>{ 
-        const rows;
+        let rows;
         if (searchType=='1'){
             console.log("1");
             rows= await db.load(`select * from san_pham where ten_sp like '%${inputSearch}%'`)
@@ -37,5 +37,7 @@ module.exports = {
         }
         console.log(rows);
         return rows[0];
-    }
+    },
+    
+    favourite: (user) => db.load(`select * from san_pham join yeu_thich on id = id_sp and id_user = '${user}'`)
 }

@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const moment = require('moment');
 const nguoidungModel = require('../models/nguoidung.model');
+const sanphamModel = require('../models/sanpham.model');
 const restrict = require('../middlewares/auth.mdw');
 
 const router = express.Router();
@@ -81,11 +82,19 @@ router.post('/logout', (req, res) => {
 });
 
 router.get('/profile/:id_user', restrict, async (req, res) => {
-    const rows = await nguoidungModel.single(req.params.id_user);
+    //lấy thông tin người dùng
+    var rows = await nguoidungModel.single(req.params.id_user);
+
+    //lấy sản phẩm yêu thích
+    var farows = await sanphamModel.favourite(req.params.id_user);
+
     res.render('viewAccount/profile', {
         user: rows,
-        empty: rows.length === 0
+        empty: rows.length === 0,
+        favourite: farows,
+        empty_fa : farows.length === 0
     });
 });
+
   
 module.exports = router;

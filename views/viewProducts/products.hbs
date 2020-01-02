@@ -1,9 +1,32 @@
+{{#section 'css'}}
+    <link rel="stylesheet" href="sweetalert2.min.css">
+{{/section}}
+
+{{#section 'js'}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.28.2/sweetalert2.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+
+    <script>
+        function customAlert(){
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Thêm vào yêu thích thành công',
+                    showConfirmButton: false,
+                    timer: 3000
+                })
+        }
+    </script>
+{{/section}}
+
+
 <div class="container">
 	{{#if this.empty}}
 	<div class="row" style="background-color:#F1F2F2;">
 		<p>Không có dữ liệu</p>
 	</div>
 	{{else}}
+    <form method="POST">
 	<div class="row" style="background-color:#F1F2F2;">
 		{{#each this.products}}
             <div class="card shadow bg-white rounded m-1" style="width: 13em;">
@@ -17,12 +40,16 @@
                     <h6 class="card-text">Số lượt ra giá: </h6>
                     <div class="row">
                         <a href="/{{id}}/detailproduct" class="btn btn-secondary" role="button" aria-pressed="true">Chi tiết</a>
-                        <button type="button" class="btn btn-danger">Yêu thích</button>
+						<button type="submit"  class="btn btn-danger" formaction="/favourite/{{id}}">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            Yêu thích
+                        </button>
                     </div>
                 </div>
             </div>  
         {{/each}}  
 	</div>
+    </form>
 	<nav aria-label="Page navigation example">
 		 	<ul class="pagination justify-content-center">
 		   		{{#each this.page_numbers}}   

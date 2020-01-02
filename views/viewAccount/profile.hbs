@@ -34,48 +34,34 @@
             </div>
 
             <div class="tab-pane fade" id="list-2" role="tabpanel" aria-labelledby="list-profile-list">
+                    <form method="POST">
                     <div class="good row">
-                        <div class="card" style="width: 13rem;">
-                        <img src="1.jpg" class="card-img-top" alt="...">
+                      {{#if this.empty_fa}}
+                      <p>Chưa có sản phẩm yêu thích</p>
+                      {{else}}
+                      {{#each this.favourite}}
+                      <div class="card shadow bg-white rounded" style="width: 13em;">
+                        <img src="/images/{{id}}/main.jpg" class="card-img-top" alt={{ten_sp}}>
                         <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <a href="#" class="btn btn-secondary">Đấu giá</a>
+                            <h5 class="card-title">{{ten_sp}}</h5>
+                            <h6 class="card-text">Giá hiện tại: {{format gia_hien_tai}}</h6>
+                            <h6 class="card-text">Bidder đặt giá cao nhất: </h6>
+                            <h6 class="card-text">Ngày đăng: {{ngay_dang}}</h6>
+                            <h6 class="card-text">Ngày kết thúc: {{ngay_het_han}}</h6>
+                            <h6 class="card-text">Số lượt ra giá: </h6>
+                            <div class="row">
+                                <a href="/{{id}}/detailproduct" class="btn btn-secondary" role="button" aria-pressed="true">Chi tiết</a>
+                                <button type="submit" class="btn btn-outline-danger" formaction="/favourite/del/{{id}}">
+                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                      Bỏ yêu thích
+                                </button>
+                            </div>
                         </div>
-                      </div>
-                      <div class="card" style="width: 13rem;">
-                        <img src="2.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <a href="#" class="btn btn-secondary">Đấu giá</a>
-                        </div>
-                      </div>
-                      <div class="card" style="width: 13rem;">
-                        <img src="3.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <a href="#" class="btn btn-secondary">Đấu giá</a>
-                        </div>
-                      </div>
-                      <div class="card" style="width: 13rem;">
-                        <img src="4.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <a href="#" class="btn btn-secondary">Đấu giá</a>
-                        </div>
-                      </div>
-                      <div class="card" style="width: 13rem;">
-                        <img src="5.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <a href="#" class="btn btn-secondary">Đấu giá</a>
-                        </div>
-                      </div>
-                      </div>
+                      </div>  
+                      {{/each}}
+                      {{/if}} 
+                    </div>
+                    </form>
             </div>
 
             <div class="tab-pane fade" id="list-3" role="tabpanel" aria-labelledby="list-messages-list">
@@ -202,4 +188,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>
