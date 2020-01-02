@@ -18,7 +18,7 @@
     function validate() { //kiểm tra hợp lệ thông tin
       var UserName = document.forms["frmRegister"]["ten_dang_nhap"];
       var PassWord = document.forms["frmRegister"]["raw_password"];
-      var cfPassword = document.forms["frmRegister"]["raw_cf_password"];
+      var cfPassword = document.forms["frmRegister"]["txtConfirm"];
       var Name = document.forms["frmRegister"]["ten"];
       var Email = document.forms["frmRegister"]["email"];
       var Dob = document.forms["frmRegister"]["dob"];
@@ -32,7 +32,7 @@
 
       if(cfPassword.value != PassWord.value)
       {
-        Email.style.borderColor = "black";
+        Email.style.borderColor = "lightgrey";
         cfPassword.style.borderColor = "red";
         return false;
       }
@@ -40,7 +40,7 @@
       var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
       if(!Email.value.match(mailformat))
       {
-        cfPassword.style.borderColor = "black";
+        cfPassword.style.borderColor = "lightgrey";
         Email.style.borderColor = "red";
         return false;
       }
@@ -51,19 +51,25 @@
 {{/section}}
 
 <div class="card shadow mb-4">
-  <h4 class="card-header">
-    Đăng ký thành viên
-  </h4>
-  <div class="card-body">
-    {{#if err_message}}
+  {{#if err_message}}
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
           {{err_message}}
         </div>
-    {{/if}}
-   
+  {{else}}
+    {{#if success}}
+      <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading"></h4>
+        <p>Đăng ký thành công. Bạn đã trở thành thành viên của hệ thống</p>
+        <p class="mb-0"></p>
+      </div>
+    {{else}}
+    <h4 class="card-header">
+    Đăng ký thành viên
+    </h4>
+    <div class="card-body">   
     <form onsubmit="return validate()" method="POST" novalidate id="frmRegister" name="frmRegister">
       <div class="row">
           <div class="m-2">
@@ -78,7 +84,7 @@
                 </div>
                 <div class="form-group">
                   <label for="txtConfirm">Confirm</label>
-                  <input type="password" class="form-control" id="txtConfirm" name = "raw_cf_password">
+                  <input type="password" class="form-control" id="txtConfirm" >
                 </div>
           </div>
 
@@ -112,5 +118,8 @@
         </div>
       </div>
     </form>
+    </div>
+    {{/if}}
+  {{/if}}
   </div>
 </div>

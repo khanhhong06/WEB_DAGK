@@ -1,3 +1,28 @@
+{{#section 'js'}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
+    <script>
+        function validPrice()
+        {
+            var BidPrice = document.forms["frmBid"]["gia_dau"];
+            var CurrentPrice = document.forms["frmBid"]["gia_hien_tai"].value;
+
+            if(BidPrice == null)
+            {
+                BidPrice.style.borderColor = "red";
+                return false;
+            }
+
+            if(CurrentPrice >= parseInt(BidPrice.value))
+            {
+                BidPrice.style.borderColor = "black";
+                alert("Vui lòng ra giá cao hơn hiện tại");
+                return false;                   
+            }
+
+            return false;            
+        }
+    </script>
+{{/section}}
 <div class="col-lg-9 col-centered mt-4">
     {{#each this.products}}
     <form method="POST">
@@ -13,7 +38,7 @@
             <div class="col-md-8">
                 <div class="card-body">
                     <h3 class="card-title">{{ten_sp}}</h3>
-                    <h4 class="mb-0">Giá hiện tại: {{format gia_hien_tai}}</h4>
+                    <h4 class="mb-0">Giá hiện tại: <i id="gia_hien_tai">{{format gia_hien_tai}}</i></h4>
                     <h4 class="mb-0">Giá khởi điệm: {{format gia_khoi_diem}}</h4>
                     <small class="text-muted">Người bán: {{nguoi_ban_id}}</small>
                     <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
@@ -28,14 +53,15 @@
                     4.0 stars
                     <p class="card-text mt-3">Kích cỡ: {{kich_co}}</p>
                     <p class="card-text mt-3">Trọng lượng: {{trong_luong}}</p>
-                    <form class="form-inline">
+                    <form class="form-inline" onsubmit="return validPrice()" novalidate formaction="/bid/{{id}}"
+                    id="frmBid" name="frmBid">
                         <div class="form-group mb-2">
                             <label for="bidPrice" class="sr-only">Bid Price</label>
                             <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Bid Price:">
                         </div>
                         <div class="form-group mx-sm-3 mb-2">
                             <label for="inputPassword2" class="sr-only"></label>
-                            <input type="text" class="form-control" placeholder="Higher than current price" style="width: 300px">
+                            <input type="text" class="form-control" id="gia_dau" name="gia_dau" placeholder="Higher than current price" style="width: 300px">
                         </div>
                         <button type="submit" class="btn btn-secondary mb-2">Bid</button>
                     </form>
