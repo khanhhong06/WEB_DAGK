@@ -40,7 +40,7 @@
       var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
       if(!Email.value.match(mailformat))
       {
-        cfPassword.style.borderColor = "black";
+        cfPassword.style.borderColor = "lightgrey";
         Email.style.borderColor = "red";
         return false;
       }
@@ -51,11 +51,7 @@
 {{/section}}
 
 <div class="card shadow mb-4">
-  <h4 class="card-header">
-    Đăng ký thành viên
-  </h4>
-  <div class="card-body">
-    {{#if err_message}}
+  {{#if err_message}}
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -73,9 +69,7 @@
     <h4 class="card-header">
     Đăng ký thành viên
     </h4>
-    <div class="card-body">
-    {{/if}}
-   
+    <div class="card-body">   
     <form onsubmit="return validate()" method="POST" novalidate id="frmRegister" name="frmRegister">
       <div class="row">
           <div class="m-2">

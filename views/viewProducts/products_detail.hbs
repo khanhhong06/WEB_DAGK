@@ -19,7 +19,7 @@
                 return false;                   
             }
 
-            return true;            
+            return false;            
         }
     </script>
 {{/section}}
@@ -53,7 +53,7 @@
                     4.0 stars
                     <p class="card-text mt-3">Kích cỡ: {{kich_co}}</p>
                     <p class="card-text mt-3">Trọng lượng: {{trong_luong}}</p>
-                    <form class="form-inline" onsubmit="return validPrice()" novalidate action="/bid" method="POST"
+                    <form class="form-inline" onsubmit="return validPrice()" novalidate formaction="/bid/{{id}}"
                     id="frmBid" name="frmBid">
                         <div class="form-group mb-2">
                             <label for="bidPrice" class="sr-only">Bid Price</label>

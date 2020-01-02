@@ -15,7 +15,7 @@ router_Products.get('/:id/detailproduct', async(req,res) => {
 })
 
 //Xy ly bid (chua xong)
-router_Products.post('/bid', async (req,res) =>{
+router_Products.post('/bid/:id', async (req,res) =>{
 
   var price= req.body.gia_dau;
   var currentprice = req.body.gia_hien_tai;
