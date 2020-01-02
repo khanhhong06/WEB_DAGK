@@ -10,6 +10,13 @@ module.exports = {
     
         return rows[0];
     },
+    singleByEmail: async email => {
+      const rows = await db.load(`select * from nguoi_dung where email = '${email}'`);
+      if (rows.length === 0)
+        return null;
+  
+      return rows[0];
+    },
     add: entity => db.add('nguoi_dung', entity),
     del: id_nguoidung => db.del('nguoi_dung', {id : id_nguoidung}),
 }

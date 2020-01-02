@@ -18,8 +18,26 @@ module.exports = {
         return db.patch('san_pham',entity,condition);
     },
 
-    maxID: () => db.load('select max(id) as max from san_pham')
+    maxID: () => db.load('select max(id) as max from san_pham'),
 
     search:inputSearch=>db.load(`select * from san_pham where ten_sp like '%${inputSearch}%'`),
-
+    searchType:async(inputSearch,searchType)=>{ 
+        let rows;
+        if (searchType=='1'){
+            console.log("1");
+            rows= await db.load(`select * from san_pham where ten_sp like '%${inputSearch}%'`)
+        }
+        else if (searchType=='2'){
+            console.log("2");
+            rows= await db.load(`select * from san_pham where ten_sp like '%${inputSearch}%' and chung_loai = ${searchType}`)
+        }
+        else if (searchType=='3'){
+            console.log("3");
+            rows= await db.load(`select * from san_pham where gia_hien_tai <= ${inputSearch}`)
+        }
+        console.log(rows);
+        return rows[0];
+    },
+    
+    favourite: (user) => db.load(`select * from san_pham join yeu_thich on id = id_sp and id_user = '${user}'`)
 }

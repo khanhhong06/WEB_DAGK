@@ -6,16 +6,16 @@ const multer = require('multer');
 const mkdirp = require('mkdirp');
 const rimraf = require('rimraf');
 
-/*const storage = multer.diskStorage({
-  filename: function (req, file, cb) {
-    cb(null, file.originalname)
+var storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, '../public/images/')
   },
-  destination: function (req, file, cb) {
-    cb(null, `./public/images/41`);
-  },
-});
+  filename: function ( req, file , cb) {
+    cb(null, file.fieldname + '-' + Date.now())
+  }
+})
 
-const upload = multer({ storage });*/
+var upload = multer ({storage: storage});
 
 const router = express.Router();
 
@@ -125,6 +125,10 @@ router.post('/upload', async function (req, res) {
   var ID_loai = await phanloaiModel.getID_loai(entity.Type);
   ID_loai = ID_loai[0].id_loai;
   
+  mkdirp(`./public/images/${newID}`, function(err) { 
+    // path exists unless there was an error
+  });
+
   var row = {};
   row.id = newID;
   row.ten_sp = entity.Name;
@@ -136,40 +140,15 @@ router.post('/upload', async function (req, res) {
   row.chung_loai = ID_loai;
   row.mo_ta = entity.FullDes;
   //const result =  await sanphamModel.add(row);
-})
-
-router.post('/upload-images', async(req, res) => {
-  //const filename = `main.jpg`;
-  var maxID = await sanphamModel.maxID();
-  maxID = maxID[0].max;
-  const newID = maxID + 1;
-
-  const des = `./public/images/${newID}/`;
-  //console.log(des);
-  mkdirp(des, function (err) {
-
-  });
-  
-  var storage = multer.diskStorage({
-    filename: function (req, file, cb) {
-      cb(null, 'main.jpg');
-    },
-    destination: function (req, file, cb) {
-      cb(null, des);
-    },
-  });
-
-  let upload = multer({ storage });
 
   upload.single('fuMain')(req, res, err => {
-    if (err) { 
-        res.send('err'); 
-        return; 
-      }
-      
-    //res.send('ok');
+    if (err) { }
+
+    res.send('ok');
   });
 })
+
+
 router.get('/err', (req, res) => {
   throw new Error('error occured');
 })
