@@ -44,7 +44,9 @@ router.post('/register', async(req, res) => {
     
     const result = await nguoidungModel.add(entity);
 
-    res.render('viewAccount/register');
+    res.render('viewAccount/register',{
+      success: 'Register successfully'
+    });
 });
 
 router.get('/login', (req, res) => {
