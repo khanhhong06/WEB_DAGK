@@ -14,21 +14,23 @@
             <div class="tab-pane fade show active" id="list-1" role="tabpanel" aria-labelledby="list-home-list">
                 <div class="row no-gutters">
                     <div class="col-md-8">
+                      <form method="POST">
                         <div class="card-body ml-5">
                             {{#each this.user}}
                                     <h3 class="card-title">Thông tin tài khoản</h3>                    
                                     <p>Họ tên: {{ten}}</p>
                                     <p>Email: {{email}}</p>
                                     <p id="point">Điểm đánh giá: {{diem_danh_gia}}</p>
-                                    {{#if this.user.quyen_han}} 
+                                    {{#if quyen_han}} 
                                     <p>Loại tài khoản: Seller</p>
                                     {{else}}
                                     <p>Loại tài khoản: Bidder</p>
-                                    <button type="button" id="btnupgrage" class="btn btn-outline-success">Upgrage thành seller</button>
+                                    <button type="submit" formaction="/account/profile/upgrade/{{id}}" class="btn btn-outline-success">Upgrage thành seller</button>
                                     {{/if}}
                                     <a class="btn btn-outline-success" href="#" role="button">Đổi mật khẩu</a>
                             {{/each}}
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -188,5 +190,4 @@
             </div>
         </div>
     </div>
-</div>
 </div>

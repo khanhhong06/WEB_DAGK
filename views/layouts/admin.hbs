@@ -52,72 +52,7 @@
         </div>
     </nav>
 
-    <br>
-    <form method="POST">
-    <div class="container m-5">
-        <div class="card">
-                <div class="card-header">
-                    <b>Quản lý sản phẩm</b>
-                    <a role="button" class="btn btn-outline-success float-sm-right" href="/admin/upload">Đăng sản phẩm</a>
-                </div>
-                <div class="row card-body">
-                
-                    <div class="col">
-                        <div class="list-group">
-                        {{#each lcCategories}}
-                            <a href="/admin/categories/{{id_loai}}" class="list-group-item list-group-item-action  {{#if isActive}} active {{/if}}">{{ten_loai}}</a>
-                        {{/each}}
-                            <a href="/admin/categories/cat/all" class="list-group-item list-group-item-action {{#if lcCategories.isActive}} active {{/if}}">Tất cả</a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-9">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                <th scope="col">Mã sản phẩm</th>
-                                <th scope="col">Thời gian đăng</th>
-                                <th scope="col">Tên sản phẩm</th>
-                                <th scope="col">Seller</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                               
-                                {{#if this.empty}}
-                                    <h4>Không có dữ liệu</h4>
-                                {{else}}
-                                {{#each this.categories}}
-                                <tr>
-                                <th scope="row">{{id}}</th>
-                                <td>{{ngay_dang}}</td>
-                                <td>{{ten_sp}}</td>
-                                <td>{{nguoi_ban_id}}</td>
-                                <td class="text-right row">
-                                    <a class="btn btn-sm btn-primary mr-1" href="/admin/categories/detail/{{id}}" role= "button">
-                                        Xem
-                                    </a>
-                                    <button type="submit" class="btn btn-sm btn-danger" formaction="/admin/categories/del/{{id}}">
-                                       <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                         Xóa
-                                    </button>
-                                </td>
-                                </tr>
-                                {{/each}}
-                                {{/if}}
-                                
-                            </tbody>
-                        </table>
-                    </div>
-                
-                </div>
-                
-                    
-        </div>
-                
-    </div>
-    </form>
-        
-    
+    {{{body}}}
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

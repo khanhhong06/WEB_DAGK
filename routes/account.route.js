@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const moment = require('moment');
 const nguoidungModel = require('../models/nguoidung.model');
 const sanphamModel = require('../models/sanpham.model');
+const xinphepUpgradeModel = require('../models/xinupgrade.model');
 const restrict = require('../middlewares/auth.mdw');
 
 const router = express.Router();
@@ -95,6 +96,25 @@ router.get('/profile/:id_user', restrict, async (req, res) => {
         empty_fa : farows.length === 0
     });
 });
+
+router.post('/profile/upgrade/:id', async (req, res) => {
+    //thêm vào bảng xin_phep_upgrade
+    const rows = await xinphepUpgradeModel.single(req.params.id);
+    //console.log(rows);
+
+    if (rows === undefined) {
+        var today = new Date();
+        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    
+        var entity = {};
+        entity.id_user = req.params.id;
+        entity.ngay_dk = date;
+    
+        const result = await xinphepUpgradeModel.add(entity);
+    }
+    
+    res.redirect(req.headers.referer);
+})
 
   
 module.exports = router;

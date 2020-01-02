@@ -2,7 +2,7 @@ const db = require('../utils/db');
 const config = require('../config/default.json');
 
 module.exports = {
-    all: () => db.load('select * from san_pham'),
+    all: () => db.load(`select * from san_pham`),
     single: id => db.load(`select * from san_pham where id = ${id}`),
     allByCat: id_loai => db.load(`select * from san_pham where chung_loai = '${id_loai}'`),
     countByCat: async id_loai => {
@@ -13,7 +13,7 @@ module.exports = {
     add: entity =>db.add('san_pham', entity),
     del: id => db.del('san_pham',{ID: id}),
     patch: entity => {
-        const condition = { ID: entity.id};
+        const condition = { id: entity.id};
         delete entity.id;
         return db.patch('san_pham',entity,condition);
     },
@@ -38,6 +38,6 @@ module.exports = {
         console.log(rows);
         return rows[0];
     },
-    
+
     favourite: (user) => db.load(`select * from san_pham join yeu_thich on id = id_sp and id_user = '${user}'`)
 }
