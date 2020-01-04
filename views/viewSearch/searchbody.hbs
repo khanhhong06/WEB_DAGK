@@ -1,33 +1,68 @@
 <div>
-    <ul class="nav nav-pills navbar navbar-light bg-light">
-        <li style="width:100px">
-                    <select id="searchType" name="searchType" class="form-control">
-                        <option value="1">Tên</option>
-                        <option value="2">Loại</option>
-                        <option value="3">Giá</option>
-                </select>
-                </li>
-    </ul>
-    <div class="jumbotron jumbotron-fluid row" style="display: flex;justify-content: center;"> 
-        <div class="container">
-            <div class="good row" style="justify-content: center; justify-content: space-around;">
-                {{#each this.products}}
-                <div class="card shadow bg-white rounded" style="width: 13em;">
-                    <img src="/images/{{id}}/main.jpg" class="card-img-top" alt="{{ten_sp}}" title="{{ten_sp}}" >
-                    <div class="card-body">
-                        <h5 class="card-title">{{ten_sp}}</h5>
-                        <h6 class="card-text">Giá hiện tại: {{format gia_hien_tai}}</h6>
-                        <h6 class="card-text">Bidder đặt giá cao nhất: Yang</h6>
-                        <h6 class="card-text">Ngày đăng: {{ngay_dang}}</h6>
-                        <h6 class="card-text">Ngày kết thúc: {{ngay_het_han}}</h6>
-                        <h6 class="card-text">Số lượt ra giá: </h6>
-                        <div class="row">
-                            <a href="/{{id}}/detailproduct" class="btn btn-secondary" role="button" aria-pressed="true">Chi tiết</a>
-                            <button type="button" class="btn btn-danger">Yêu thích</button>
-                        </div>
-               </div>  
-                {{/each}}  
-            </div>    
-        </div>   
+<ul class="nav nav-pills navbar navbar-light bg-light" style="">
+        <div style="margin-left: 2.6%;">
+        <ul class="nav nav-pills navbar navbar-light bg-light" >
+            <form action="/search/sort" method="POST">
+            <li style="width:150px; display:inline-block;">
+                    <select id="sortProducts" name="sortProducts" class="form-control" onchange="this.form.submit()">
+                        <option value="0">Tất cả</option>
+                        <option value="1">Ngày đăng tăng dần</option>
+                        <option value="2">Ngày đăng giảm dần</option>
+                        <option value="3">Giá tăng dần</option>
+                        <option value="4">Giá giảm dần</option>
+                    </select>
+            </li>
+            </form>
+        </ul>
+        </div>
+</ul>
+
+<div>
+    <div class="jumbotron jumbotron-fluid row" style="display: flex;justify-content: center;">
+    <div class="container">
+        <form method="POST">
+        <div class="good row" style="justify-content: center; justify-content: space-around;">
+            {{#each this.products}}
+            <div class="card shadow bg-white rounded" style="width: 13em;">
+                <img src="/images/{{id}}/main.jpg" class="card-img-top" alt="{{ten_sp}}" title="{{ten_sp}}" >
+                <div class="card-body">
+                    <h5 class="card-title">{{ten_sp}}</h5>
+                    <h6 class="card-text">Giá hiện tại: {{format gia_hien_tai}}</h6>
+                    <h6 class="card-text">Bidder đặt giá cao nhất: Yang</h6>
+                    <h6 class="card-text">Ngày đăng: {{ngay_dang}}</h6>
+                    <h6 class="card-text">Ngày kết thúc: {{ngay_het_han}}</h6>
+                    <h6 class="card-text">Số lượt ra giá: </h6>
+                    <div class="row">
+                        <a href="/{{id}}/detailproduct" class="btn btn-secondary" role="button" aria-pressed="true">Chi tiết</a>
+                        <button type="submit" class="btn btn-danger" formaction="/favourite/{{id}}">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            Yêu thích
+                        </button>
+                    </div>
+                </div>
+            </div>  
+            {{/each}}  
+        </div>
+        </form>
     </div>
+    </div>
+</div>
+<script>
+        function post(path, params, method='POST') {
+            const form = document.createElement('form');
+            form.method = method;
+            form.action = path;
+            for (const key in params) {
+                if (params.hasOwnProperty(key)) {
+                    const hiddenField = document.createElement('input');
+                    hiddenField.type = 'hidden';
+                    hiddenField.name = key;
+                    hiddenField.value = params[key];
+                    form.appendChild(hiddenField);
+                }
+            }
+            document.body.appendChild(form);
+            form.submit();
+        }
+</script>
 </div>

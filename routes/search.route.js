@@ -3,8 +3,51 @@ const productsModel = require('../models/sanpham.model');
 const config = require('../config/default.json');
 
 const router = express.Router();
+let results;
 
 // trang chu
+
+function increasePrice( a, b ) {
+  if (a.gia_hien_tai < b.gia_hien_tai){
+    return -1;
+  }
+  if (a.gia_hien_tai > b.gia_hien_tai ){
+      return 1;
+  }
+  return 0;
+}
+
+function decreasePrice( a, b ) {
+  if (a.gia_hien_tai > b.gia_hien_tai){
+    return -1;
+  }
+  if (a.gia_hien_tai < b.gia_hien_tai ){
+    return 1;
+  }
+  return 0;
+}
+
+function increaseDate(a,b){
+  var tempa,tempb;
+  if (a.ngay_dang < b.ngay_dang){
+    return -1;
+  }
+  if (a.ngay_dang > b.ngay_dang){
+      return 1;
+  }
+  return 0;
+}
+
+function decreaseDate(a,b){
+  var tempa,tempb;
+  if (a.ngay_dang > b.ngay_dang){
+    return -1;
+  }
+  if (a.ngay_dang < b.ngay_dang){
+      return 1;
+  }
+  return 0;
+}
 
 router.get('/', async(req, res) => {
     const rows = await productsModel.all();
@@ -14,11 +57,33 @@ router.get('/', async(req, res) => {
     });
 }) 
 
-router.post('/',async(req,res)=>{
-  const rows=await productsModel.search(req.body.inputSearch);
+router.post('/sort',function(req,res){
+  if (req.body.sortProducts=='1'){
+    results=results.sort(increaseDate);
+  }
+  else if (req.body.sortProducts=='2'){
+    results=results.sort(decreaseDate);
+  }
+  else if (req.body.sortProducts=='3'){
+    results= results.sort(increasePrice);
+  } 
+  else if (req.body.sortProducts=='4'){
+    results= results.sort(decreasePrice);
+  }
+  console.log(results);
   res.render('viewSearch/searchbody',{
-    products: rows,
-    empty: rows.length===0
+    products: results,
+    empty: results.length===0
+  });
+})
+
+router.post('/',async(req,res)=>{
+  results=await productsModel.search(req.body.inputSearch,req.body.searchType);
+  // let temp = document.getElementById("inputSearch");
+  // temp.innerHTML=req.body.inputSearch;
+  res.render('viewSearch/searchbody',{
+    products: results,
+    empty: results.length===0
   });
   //res.render('viewHome/index')
 })
