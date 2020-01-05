@@ -1,5 +1,7 @@
 {{#section 'js'}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
     function validPrice() {
         var BidPrice = document.forms["FrmBid"]["gia_dau"];
@@ -67,7 +69,7 @@
                 4.0 stars
                 <p class="card-text mt-3">Kích cỡ: {{kich_co}}</p>
                 <p class="card-text mt-3">Trọng lượng: {{trong_luong}}</p>
-                <form onsubmit="return validate()" novalidate method="POST" id="frmBid" name="FrmBid">
+                <form onsubmit="return validPrice()" novalidate method="POST" id="frmBid" name="FrmBid">
                     <div class="form-group mb-2">
                         <label for="bidPrice" class="sr-only">Bid Price</label>
                     </div>
@@ -76,8 +78,32 @@
                         <input type="text" class="form-control" id="gia_dau" name="gia_dau"
                             placeholder="Higher than {{gia_hien_tai}}" style="width: 300px">
                     </div>
-                    <button type="submit" form="frmBid" value="Submit"
-                        formaction="/products/{{id}}/{{gia_hien_tai}}/bid" class="btn btn-secondary mb-2">Bid</button>
+                    <!--Bid Button-->
+                    <button type="button" class="btn btn-secondary mb-2" data-toggle="modal" data-target="#myModal">Bid</button>
+                    <!--Confirm Dialog-->
+                    <div class="modal fade" id="myModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Xác nhận đấu giá</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    Bạn có chắc muốn ra giá ?
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="submit" form="frmBid" value="Submit" class="btn btn-primary" 
+                                        formaction="/products/{{id}}/{{gia_hien_tai}}/bid">Xác nhận</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
                 <form id="frmProduct" name="frmProduct" method="POST">
                     <button type="submit" form="frmProduct" class="btn btn-danger" formaction="/favourite/{{id}}">

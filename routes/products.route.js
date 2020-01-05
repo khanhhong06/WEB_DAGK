@@ -56,17 +56,11 @@ router_Products.post('/:id/:crprice/bid', async (req,res) =>{
   //Cap nhat lai gia hien tai
   const en_sanpham = await productsModel.single(productid);
   en_sanpham[0].gia_hien_tai = bidprice;
-  console.log(en_sanpham);
   productsModel.updatePrice(en_sanpham);
 
-  //Quay lai trang san pham hien tai
-  const rows = await productsModel.single(productid);
-  console.log(rows);
-  res.render('viewProducts/products_detail', {
-    products: rows,
-    success: 'Bid complete',
-    empty: rows.length === 0
-  });
+  //Chuyen den trang bao thanh cong
+  res.redirect(req.headers.referer);
+
 })
 
 //xu ly nhan button 'Yeu Thich' van chua duoc
