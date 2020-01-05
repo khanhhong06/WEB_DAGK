@@ -34,5 +34,11 @@ module.exports = {
         return rows;
     },
 
-    favourite: (user) => db.load(`select * from san_pham join yeu_thich on id = id_sp and id_user = '${user}'`)
+    favourite: (user) => db.load(`select * from san_pham join yeu_thich on id = id_sp and id_user = '${user}'`),
+
+    updatePrice: entity =>{
+        const condition = { ID: entity[0].id};
+        delete entity[0].id;
+        return db.patch('san_pham',entity[0],condition);
+    }
 }
