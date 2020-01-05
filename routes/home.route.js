@@ -43,7 +43,6 @@ function top5Price(rows){
   var temp=[];
   for (var i=0;i<rows.length;i++){
     if ((rows[i].ngay_het_han>today)&&(!(rows[i].ngay_het_han==='null'))){
-      console.log(rows[i]);
       temp.push(rows[i]);
     }
     // console.log(moment(rows[i].ngay_het_han, "").format('dd/MM/YYYY'));
@@ -54,17 +53,44 @@ function top5Price(rows){
   }
   temp=temp.sort(decreasePrice);
   temp=temp.slice(0,5);
-  console.log(temp);
   return temp;
 }
 
+// function top5Bid(){
+//   var temp=productsModel.allByCat(1);
+//   console.log(temp);
+//   var temp2= temp.san_pham_id;
+  
+//   var temp3=[];
+//   for (var i=0;i<temp2.length;i++)
+//   {
+//     temp3.push(productsModel.single(temp2[i]));
+//   }
+//   console.log(temp3);
+//   return temp3;
+// }
+
 router.get('/', async(req, res) => {
     const rows = await productsModel.all();
+    const t2=await productsModel.topbid();
+    console.log(t2);
+    // const temp1=temp.san_pham_id;
+    // console.log('abc');
+    // console.log(temp1);
+    
     const t1=top5Date(rows);
     const t3=top5Price(rows);
+  
+    // for (var i=0;i<temp.length;i++)
+    // {
+    //   console.log(temp[i][0]);
+    //   t2.push(productsModel.single(temp[i].san_pham_id));
+    // }
+
     res.render('viewHome/index', {
         products: rows,
         products1:t1,
+        products2:t2,
         products3:t3,
         empty: rows.length === 0
     });
