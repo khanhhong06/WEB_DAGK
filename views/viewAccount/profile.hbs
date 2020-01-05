@@ -23,11 +23,13 @@
                                     <p id="point">Điểm đánh giá: {{diem_danh_gia}}</p>
                                     {{#if quyen_han}} 
                                     <p>Loại tài khoản: Seller</p>
+                                    <a class="btn btn-outline-success m-1" href="#" role="button">Đăng sản phẩm</a>
                                     {{else}}
                                     <p>Loại tài khoản: Bidder</p>
                                     <button type="submit" formaction="/account/profile/upgrade/{{id}}" class="btn btn-outline-success">Upgrage thành seller</button>
                                     {{/if}}
-                                    <a class="btn btn-outline-success" href="#" role="button">Đổi mật khẩu</a>
+                                    <a class="btn btn-outline-primary m-1" href="/account/profile/change/{{id}}" role="button">Đổi thông tin</a>
+                                    <a class="btn btn-outline-primary m-1" href="/account/profile/changepass/{{id}}" role="button">Đổi mật khẩu</a>
                             {{/each}}
                         </div>
                         </form>

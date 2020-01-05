@@ -116,5 +116,79 @@ router.post('/profile/upgrade/:id', async (req, res) => {
     res.redirect(req.headers.referer);
 })
 
+router.get('/profile/change/:id_user', async (req, res) => {
+    const row = await nguoidungModel.single(req.params.id_user);
+
+    res.render('viewAccount/changeProfile',
+    {
+        info: row,
+        empty: row.length
+    });
+})
+
+router.post('/profile/change/:id_user', async (req, res) => {
+    var row = await nguoidungModel.single(req.params.id_user);
+    row = row[0];
+
+    const entity = req.body;
+
+    //xử lý email đã tồn tại
+    const email = await nguoidungModel.singleByEmail(req.body.Email);
+    console.log(email);
+    if (email === null) { //ko có tài khoản nào email trùng
+        row.ten = entity.Name;
+        row.email = entity.Email;
+        row.ngay_sinh = entity.DOB;
+        const result = await nguoidungModel.patch(row);
+    }
+    else{//có tài khoản có email trùng
+        //có phải tài khoản đang được đăng nhập hay ko
+        const r = email.id === row.id;
+        if (r){ // true
+            row.ten = entity.Name;
+            row.email = entity.Email;
+            row.ngay_sinh = entity.DOB;
+            const result = await nguoidungModel.patch(row);
+        } else {
+            return res.render('viewAccount/register', {
+                err_message: 'Email already exists'
+                });
+        }
+    }
+
+    res.redirect(req.headers.referer);
+})
   
+router.get('/profile/changepass/:id_user', (req, res) => {
+    res.render('viewAccount/changePass');
+})
+
+router.post('/profile/changepass/:id_user', async (req, res) => {
+    var row = await nguoidungModel.single(req.params.id_user);
+    row = row[0];
+
+    const rs = bcrypt.compareSync(req.body.oldPass, row.mat_khau);
+    if (rs === false)
+      return res.render('viewAccount/changePass', {
+        err_message: 'Invalid password'
+      });
+
+    //re === true
+    console.log(req.body.newPass);
+
+    const N=10;
+    const hash = bcrypt.hashSync(req.body.newPass,N);
+    console.log(hash);
+
+    row.mat_khau = hash;
+
+    console.log(row);
+
+   // const result = await nguoidungModel.patch(row);
+
+    res.render('viewAccount/changePass', {
+        err_message: 'Password is changed'
+    });
+})
+
 module.exports = router;
