@@ -46,6 +46,7 @@ router.post('/', async (req, res) => {
 
     row.ten_sp = entity.Name;
     row.gia_khoi_diem = entity.BeginPrice;
+    row.gia_ban_toi_thieu = entity.MinimumPrice;
     row.nguoi_ban_id =  req.session.authUser.id;
     var today = new Date();
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
