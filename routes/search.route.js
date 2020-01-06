@@ -70,7 +70,6 @@ router.post('/sort',function(req,res){
   else if (req.body.sortProducts=='4'){
     results= results.sort(decreasePrice);
   }
-  console.log(results);
   res.render('viewSearch/searchbody',{
     products: results,
     empty: results.length===0
