@@ -89,16 +89,73 @@ router.get('/multiple', (req, res) => {
 })
 
 
-router.post('/multiple', upload.single('fuMain'), async (req, res, next) => {
-    const file = req.file
+router.post('/multiple', /*upload.single('fuMain'),*/ async (req, res, next) => {
+    /*const file = req.file
     if (!file) {
       const error = new Error('Please upload a file')
       error.httpStatusCode = 400
       return next(error)
-    }
+    }*/
+
+    upload.single('fuMain')(req, res, err => {
+      if (err) { }
+  
+      //res.send('ok'); 
+      console.log('ok');
+    });
+    /*flodername = 60;
+    console.log(flodername);
+
+    filename = flodername+'-2';
+
+    console.log(filename);
+    upload.single('fuMain1')(req, res, err => {
+      if (err) { }
+  
+      //res.send('ok');
+      console.log('ok1');
+    });
+
+    filename = flodername+'-3';
+    console.log(filename);
+    upload.single('fuMain2')(req, res, err => {
+      if (err) { }
+  
+      //res.send('ok');
+      console.log('ok2');
+    });
+
+    filename = flodername+'-4';
+    console.log(filename);
+    upload.single('fuMain3')(req, res, err => {
+      if (err) { }
+  
+      //res.send('ok');
+      console.log('ok3');
+    });*/
+
     const PORT = config.host.port;
     const referer = `http://localhost:${PORT}/`;
     res.redirect(referer);
+})
+
+router.get('/updatedes/:id_sp', restrict, (req, res) => {
+    res.render('viewProducts/updateDes');
+})
+
+router.post('/updatedes/:id_sp', async (req, res) => {
+    const row = await sanphamModel.single(req.params.id_sp);
+    var sp = row[0];
+    sp.mo_ta = sp.mo_ta + req.body.FullDes;
+
+    const result = await sanphamModel.patch(sp);
+
+    const PORT = config.host.port;
+    const user = req.session.authUser.id;
+    const referer = `http://localhost:${PORT}/account/profile/${user}`;
+    res.redirect(referer);
+  
+  res.redirect('viewProducts/updateDes');
 })
 
 router.get('/err', (req, res) => {

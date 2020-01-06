@@ -67,8 +67,6 @@
                 <small class="text-muted">Bidder ra giá cao nhất: </small>
                 <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
                 4.0 stars
-                <p class="card-text mt-3">Kích cỡ: {{kich_co}}</p>
-                <p class="card-text mt-3">Trọng lượng: {{trong_luong}}</p>
                 <form onsubmit="return validPrice()" novalidate method="POST" id="frmBid" name="FrmBid">
                     <div class="form-group mb-2">
                         <label for="bidPrice" class="sr-only">Bid Price</label>
@@ -114,13 +112,13 @@
             </div>
         </div>
     </div>
-    {{/each}}
+    
     <div class="card card-outline-secondary my-2">
         <div class="card-header">
             Reviews sản phẩm
         </div>
         <div class="card-body">
-            <p>{{mo_ta}}</p>
+            <p>{{{mo_ta}}}</p>
             <hr>
             <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapseExample"
                 aria-expanded="false" aria-controls="collapseExample">
@@ -162,7 +160,7 @@
             </div>
         </div>
     </div>
-    
+    {{/each}}
     <div class="card card-outline-secondary my-4">
         <div class="card-header">
             Sản phẩm tương tự

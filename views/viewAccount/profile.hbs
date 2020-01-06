@@ -1,10 +1,14 @@
 <div class="row m-4">
+  {{#each this.user}}
     <div class="col-4">
               <div class="list-group" id="list-tab" role="tablist">
                 <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-1" role="tab" aria-controls="profile">Thông tin cá nhân</a>
                 <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-2" role="tab" aria-controls="favourite">Sản phẩm yêu thích</a>
                 <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-3" role="tab" aria-controls="bidding">Sản phẩm đang đấu giá</a>
                 <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-4" role="tab" aria-controls="won">Sản phẩm đã thắng</a>
+                {{#if quyen_han}} 
+                   <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-sell" role="tab" aria-controls="sell">Sản phẩm đã đăng bán</a>
+                {{/if}}
                 <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-5" role="tab" aria-controls="comment">Xem đánh giá</a>
               </div>
     </div>
@@ -16,7 +20,7 @@
                     <div class="col-md-8">
                       <form method="POST">
                         <div class="card-body ml-5">
-                            {{#each this.user}}
+                            
                                     <h3 class="card-title">Thông tin tài khoản</h3>                    
                                     <p>Họ tên: {{ten}}</p>
                                     <p>Email: {{email}}</p>
@@ -30,13 +34,13 @@
                                     {{/if}}
                                     <a class="btn btn-outline-primary m-1" href="/account/profile/change/{{id}}" role="button">Đổi thông tin</a>
                                     <a class="btn btn-outline-primary m-1" href="/account/profile/changepass/{{id}}" role="button">Đổi mật khẩu</a>
-                            {{/each}}
+                           
                         </div>
                         </form>
                     </div>
                 </div>
             </div>
-
+ {{/each}}
             <div class="tab-pane fade" id="list-2" role="tabpanel" aria-labelledby="list-profile-list">
                     <form method="POST">
                     <div class="good row">
@@ -156,6 +160,32 @@
                         </div>
                       </div>
                       </div>
+            </div>
+
+            <div class="tab-pane fade" id="list-sell" role="tabpanel" aria-labelledby="list-settings-list">
+                <div class="good row">
+                      {{#if this.empty_sell}}
+                          <p>Chưa có sản phẩm yêu thích</p>
+                      {{else}}
+                      {{#each this.selled}}
+                      <div class="card shadow bg-white rounded" style="width: 13em;">
+                        <img src="/images/{{id}}/main.jpg" class="card-img-top" alt={{ten_sp}}>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ten_sp}}</h5>
+                            <h6 class="card-text">Giá hiện tại: {{format gia_hien_tai}}</h6>
+                            <h6 class="card-text">Bidder đặt giá cao nhất: </h6>
+                            <h6 class="card-text">Ngày đăng: {{ngay_dang}}</h6>
+                            <h6 class="card-text">Ngày kết thúc: {{ngay_het_han}}</h6>
+                            <h6 class="card-text">Số lượt ra giá: </h6>
+                            <div class="row">
+                                <a href="/{{id}}/detailproduct" class="btn btn-secondary" role="button" aria-pressed="true">Chi tiết</a>
+                                <a href="/upload/updatedes/{{id}}" class="btn btn-warning" role="button" aria-pressed="true">Bổ sung mô tả</a>
+                            </div>
+                        </div>
+                      </div>  
+                      {{/each}}
+                      {{/if}} 
+                </div>
             </div>
 
             <div class="tab-pane fade" id="list-5" role="tabpanel" aria-labelledby="list-settings-list">
