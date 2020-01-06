@@ -2,6 +2,7 @@ const express = require('express');
 const yeuthichModel = require('../models/yeuthich.model');
 const productsModel = require('../models/sanpham.model');
 const bidModel = require('../models/chitietragia.model');
+const nodemailer = require("nodemailer");
 const moment = require('moment');
 
 const router_Products = express.Router();
@@ -20,8 +21,6 @@ router_Products.get('/:id/detailproduct', async(req,res) => {
 router_Products.post('/:id/:crprice/bid', async (req,res) =>{
 
   const status =  req.session.isAuthenticated;
-
-  console.log(status);
 
   if (status === false) {
     return res.render('viewAccount/login');
@@ -52,7 +51,49 @@ router_Products.post('/:id/:crprice/bid', async (req,res) =>{
 
   //Them vao danh sach bid (chi_tiet_ra_gia)
   bidModel.add(entity);
+// Send email =================================================
+var transporter =  nodemailer.createTransport({ // config mail server
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
+  auth: {
+      user: 'meolamphong19@gmail.com', //Tài khoản gmail vừa tạo
+      pass: 'Manhtronglamphong19' //Mật khẩu tài khoản gmail vừa tạo
+  },
+  tls: {
+      // do not fail on invalid certs
+      rejectUnauthorized: false
+  }
+});
+var content = '';
+content += `
+  <div style="padding: 10px; background-color: #003375">
+      <div style="padding: 10px; background-color: white;">
+          <h4 style="color: #0085ff">THIS IS VERIFY EMAIL</h4>
+          <span style="color: black">Your bidding has been recorded successfully!!!</span>
+      </div>
+  </div>
+`;
+const mainOptions = { // thiết lập đối tượng, nội dung gửi mail
+  from: 'ngmanh2104@gmail.com',
+  to: req.session.authUser.email,
+  subject: 'ONLINE AUNCTION',
+  text: 'Your bidding has been recorded!!!',//Thường thi mình không dùng cái này thay vào đó mình sử dụng html để dễ edit hơn
+  html: content //Nội dung html mình đã tạo trên kia :))
+}
+transporter.sendMail(mainOptions, function(err, info){
+  if (err) {
+      console.log(err);
+      //req.flash('mess', 'Lỗi gửi mail: '+err); //Gửi thông báo đến người dùng
+      //res.redirect('/');
+  } else {
+      console.log('Message sent: ' +  info.response);
+      //req.flash('mess', 'Một email đã được gửi đến tài khoản của bạn'); //Gửi thông báo đến người dùng
+      //res.redirect('/');
+  }
+});
 
+// /Send email ================================================
   //Cap nhat lai gia hien tai
   const en_sanpham = await productsModel.single(productid);
   en_sanpham[0].gia_hien_tai = bidprice;

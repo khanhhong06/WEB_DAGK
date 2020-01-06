@@ -85,7 +85,6 @@ function top5Price(rows){
 router.get('/', async(req, res) => {
     const rows = await productsModel.all();
     const t2=await productsModel.topbid();
-    console.log(t2);
     // const temp1=temp.san_pham_id;
     // console.log('abc');
     // console.log(temp1);
@@ -173,14 +172,11 @@ router.get('/:id/detailproduct', async(req,res) => {
   // bid.push(bidhis);
   // bid.push(c);
   // // bid.count=c;
-  console.log(bid);
-  console.log("ahhaaaaaaaaa");
   for (var i=0;i<bid.length;i++){
     var dataMasker = new dataMask(bid[i].ten_dang_nhap);
     // bid[i].ten_dang_nhap=bid[i].ten_dang_nhap.maskRight(5);
     var num=(bid[i].ten_dang_nhap.length/2)+1;
-    bid[i].ten_dang_nhap=dataMasker.maskRight(num);
-    console.log(bid[i].ten_dang_nhap);
+    bid[i].ten_dang_nhap=dataMasker.maskLeft(num);
     // console.log(bid[i]);
   }
   const rows = await productsModel.single(req.params.id);
