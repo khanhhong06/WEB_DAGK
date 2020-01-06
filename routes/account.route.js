@@ -100,9 +100,9 @@ router.get('/profile/:id_user', restrict, async (req, res) => {
 router.post('/profile/upgrade/:id', async (req, res) => {
     //thêm vào bảng xin_phep_upgrade
     const rows = await xinphepUpgradeModel.single(req.params.id);
-    //console.log(rows);
+    console.log(rows);
 
-    if (rows === undefined) {
+    if (rows.length === 0) {
         var today = new Date();
         var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     
@@ -111,6 +111,7 @@ router.post('/profile/upgrade/:id', async (req, res) => {
         entity.ngay_dk = date;
     
         const result = await xinphepUpgradeModel.add(entity);
+        console.log(result);
     }
     
     res.redirect(req.headers.referer);
@@ -184,7 +185,7 @@ router.post('/profile/changepass/:id_user', async (req, res) => {
 
     console.log(row);
 
-   // const result = await nguoidungModel.patch(row);
+    const result = await nguoidungModel.patch(row);
 
     res.render('viewAccount/changePass', {
         err_message: 'Password is changed'

@@ -1,0 +1,29 @@
+{{#section 'css'}}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/css/fileinput.min.css" media="all"
+  rel="stylesheet" />
+{{/section}}
+
+{{#section 'js'}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/js/fileinput.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/themes/fa/theme.min.js"></script>
+
+    <script>
+         $('#fuMain').fileinput({
+            theme: 'fa',
+            dropZoneEnabled: false,
+            allowedFileExtensions: ['png', 'jpg', 'gif'],
+            enableResumableUpload: true,
+             maxFileCount: 5,
+        });
+
+    </script>
+{{/section}}
+
+<form method="POST" action="/upload/multiple"  enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="txtImage">Ảnh sản phẩm</label>
+        <div class="file-loading">
+        <input id="fuMain" name="fuMain" type="file" multiple>
+        </div>
+    </div>
+</form>

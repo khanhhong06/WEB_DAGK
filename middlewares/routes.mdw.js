@@ -7,6 +7,7 @@ module.exports = function (app) {
     app.use('/admin/accounts', require('../routes/admin/accounts.route'));
     app.use('/search',require('../routes/search.route'));
     app.use('/favourite', require('../routes/favourite.route'));
+    app.use('/upload', require('../routes/uploadProduct.route'));
   };
   
   

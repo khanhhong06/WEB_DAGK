@@ -1,6 +1,18 @@
 const express = require('express');
-
+const multer = require('multer');
 const router = express.Router();
+
+var storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, '../public/images/')
+  },
+  filename: function ( req, file , cb) {
+    cb(null, file.fieldname + '-' + Date.now())
+  }
+})
+
+var upload = multer ({storage: storage});
+
 
 router.get('/', (req, res) => {
     res.render('viewAdmin/admin', { layout: false });
