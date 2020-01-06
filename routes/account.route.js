@@ -6,6 +6,7 @@ const sanphamModel = require('../models/sanpham.model');
 const xinphepUpgradeModel = require('../models/xinupgrade.model');
 const restrict = require('../middlewares/auth.mdw');
 const config = require('../config/default.json');
+const request = require('request');
 
 const router = express.Router();
 
@@ -18,7 +19,9 @@ router.post('/register', async (req, res) => {
     // g-recaptcha-response is the key that browser will generate upon form submit.
     // if its blank or null means user has not selected the captcha, so return the error.
     if (req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null) {
-        return res.json({ "responseCode": 1, "responseDesc": "Please select captcha" });
+        return res.render('viewAccount/register', {
+            err_message: 'Please select captcha'
+        });
     }
     // Put your secret key here.
     var secretKey = "6Le_wswUAAAAALkRXypz0Ih3IfB_BO6VjRCApG4G";
@@ -29,10 +32,13 @@ router.post('/register', async (req, res) => {
         body = JSON.parse(body);
         // Success will be true or false depending upon captcha validation.
         if (body.success !== undefined && !body.success) {
-            return res.json({ "responseCode": 1, "responseDesc": "Failed captcha verification" });
+            return res.render('viewAccount/register', {
+                err_message: 'Failed captcha verification'
+            });
         }
-        res.json({ "responseCode": 0, "responseDesc": "Sucess" });
     });
+
+    delete req.body['g-recaptcha-response'];
 
     console.log(req.body);
 

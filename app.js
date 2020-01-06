@@ -3,7 +3,6 @@ const exphbs = require('express-handlebars');
 const morgan = require('morgan');
 const numeral = require('numeral');
 const bodyParser = require('body-parser');
-const request = require('request');
 const hbs_sections = require('express-handlebars-sections');
 const session = require('express-session');
 require('express-async-errors');

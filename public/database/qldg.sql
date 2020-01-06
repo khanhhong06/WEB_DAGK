@@ -129,6 +129,20 @@ CREATE TABLE `san_pham` (
 -- Dumping data for table `san_pham`
 --
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tu_choi_ra_gia`
+--
+
+CREATE TABLE `tu_choi_ra_gia` (
+  `san_pham_id` int(11) DEFAULT NULL,
+  `nguoi_dung_id` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
 INSERT INTO `san_pham` (`id`, `ten_sp`, `kich_co`, `trong_luong`, `tinh_trang`, `gia_khoi_diem`, `ngay_het_han`, `gia_ban_toi_thieu`, `gia_hien_tai`, `nguoi_ban_id`, `nguoi_thang_id`, `ngay_dang`, `chung_loai`) VALUES
 (1, 'Điện Thoại iPhone 11 Pro Max 64GB', '158 x 77.8 x 8.1 mm', '226g', NULL, 30490000, NULL, 30490000, 30490000, 1, NULL, NULL, 1),
 (2, 'Điện Thoại iPhone 11 Pro Max 256GB', '158 x 77.8 x 8.1 mm', '226g', NULL, 34990000, NULL, 34990000, 34990000, 1, NULL, NULL, 1),
@@ -170,6 +184,11 @@ CREATE TABLE `san_pham_has_ptgn` (
 -- Indexes for table `chi_tiet_ra_gia`
 --
 ALTER TABLE `chi_tiet_ra_gia`
+  ADD PRIMARY KEY (`id`);
+
+-- Indexes for table `tu_choi_ra_gia`
+--
+ALTER TABLE `tu_choi_ra_gia`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -217,7 +236,14 @@ ALTER TABLE `san_pham_has_ptgn`
 --
 ALTER TABLE `chi_tiet_ra_gia`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-COMMIT;
+
+
+--
+-- AUTO_INCREMENT for table `tu_choi_ra_gia`
+--
+ALTER TABLE `tu_choi_ra_gia`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 
 --
 -- AUTO_INCREMENT for table `nguoi_dung`
