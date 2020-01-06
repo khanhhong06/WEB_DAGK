@@ -2,6 +2,8 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const morgan = require('morgan');
 const numeral = require('numeral');
+const bodyParser = require('body-parser');
+const request = require('request');
 const hbs_sections = require('express-handlebars-sections');
 const session = require('express-session');
 require('express-async-errors');
@@ -9,6 +11,9 @@ const config = require('./config/default.json');
 
 
 const app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended : false}));
 
 app.use(morgan('dev'));
 app.use(express.json());
