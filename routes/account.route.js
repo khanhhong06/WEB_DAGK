@@ -146,7 +146,6 @@ router.get('/profile/:id_user', restrict, async (req, res) => {
         empty_fa : farows.length === 0,
         selled: selledrows,
         empty_sell: selledrows.length === 0
-        empty_fa: farows.length === 0
     });
 });
 
