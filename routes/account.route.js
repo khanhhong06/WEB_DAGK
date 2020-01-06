@@ -5,6 +5,7 @@ const nguoidungModel = require('../models/nguoidung.model');
 const sanphamModel = require('../models/sanpham.model');
 const xinphepUpgradeModel = require('../models/xinupgrade.model');
 const restrict = require('../middlewares/auth.mdw');
+const config = require('../config/default.json');
 
 const router = express.Router();
 
@@ -72,7 +73,13 @@ router.post('/login', async (req, res) => {
     req.session.isAuthenticated = true;
     req.session.authUser = user;
   
-    const url = req.query.retUrl || '/';
+    var url = req.query.retUrl || '/';
+
+    if (user.ten_dang_nhap === 'admin' || user.ten_dang_nhap === 'admin1' || user.ten_dang_nhap === 'admin2'){
+        const PORT = config.host.port;
+        url = `http://localhost:${PORT}/admin`;
+    }
+
     res.redirect(url);
 });
 

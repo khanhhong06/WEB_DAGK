@@ -1,10 +1,11 @@
 const express = require('express');
 const nguoidungModel = require('../../models/nguoidung.model');
 const xinphepUpgradeModel = require('../../models/xinupgrade.model');
+const restrict = require('../../middlewares/auth.mdw');
 
 const router = express.Router();
 
-router.get('/ds/:role', async (req, res) => {
+router.get('/ds/:role',restrict, async (req, res) => {
     const role = req.params.role;
     const c = res.locals.lcCategories;
     c.isActive2 = false;
@@ -33,7 +34,7 @@ router.get('/ds/:role', async (req, res) => {
     })
 })
 
-router.get('/upgrade', async (req, res) => {
+router.get('/upgrade',restrict, async (req, res) => {
   const c = res.locals.lcCategories;
   c.upgrade = true;
 
@@ -46,7 +47,7 @@ router.get('/upgrade', async (req, res) => {
   })
 })
 
-router.post('/upgrade/OK/:id', async (req, res) =>{
+router.post('/upgrade/OK/:id',restrict, async (req, res) =>{
   //sửa trên bảng nguoi_dung quyen_han = 1
   var row = await nguoidungModel.single(req.params.id);
   row = row[0];

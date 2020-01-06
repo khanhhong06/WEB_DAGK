@@ -29,6 +29,11 @@
       return false;
     }
 
+    if (UserName.value == 'admin' || UserName.value == 'admin1' || UserName.value == 'admin2'){
+          UserName.style.borderColor = "red";
+          return false;
+    }
+
     if (cfPassword.value != PassWord.value) {
       Email.style.borderColor = "lightgrey";
       cfPassword.style.borderColor = "red";

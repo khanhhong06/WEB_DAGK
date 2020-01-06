@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <title>Example App</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/css/fileinput.min.css" media="all"
-  rel="stylesheet" type="text/css" />
+    <link rel = "stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" role="navigation">
@@ -26,11 +25,7 @@
                             Hi, <b>{{authUser.ten_dang_nhap}}!</b>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/account/profile">
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                            Profile
-                            </a>
-                            <div class="dropdown-divider"></div>
+                           
                             <a class="dropdown-item" href="javascript: $('#frmLogout').submit();">
                             <i class="fa fa-sign-out" aria-hidden="true"></i>
                             Logout
@@ -55,16 +50,16 @@
     </nav>
 
     <br>
-    <form method="POST" novalidate>
-            <div class="m-5 row justify-content-center">
-                    <div class="card shadow">
-                        <h4 class="card-header">
-                            Upload
-                        </h4>
-                        <div class="card-body">
+    <form method="POST"  novalidate onsubmit="return vadication()" id="from" name="form" >
+    <div class="m-5 row justify-content-center">
+        <div class="card shadow">
+            <h4 class="card-header">
+                Upload
+            </h4>
+            <div class="card-body">
                             <div class="form-group">
                                 <label for="txtFullDes">Tên sản phẩm:</label>
-                                <textarea class="form-control" id="txtName" name="Name">Bắt buộc</textarea>
+                                <textarea class="form-control" id="txtName" name="Name"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="txtType">Chủng loại sản phẩm:</label>
@@ -74,46 +69,33 @@
                                     {{/each}}
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="txtFullDes">Giá hiện tại:</label>
-                                <textarea class="form-control" id="txtCurrPrice" name="CurrPrice">Bắt buộc</textarea>
-                            </div>
+                            
                             <div class="form-group">
                                 <label for="txtFullDes">Giá khởi điểm:</label>
-                                <textarea class="form-control" id="txtBeginPrice" name="BeginPrice">Bắt buộc</textarea>
+                                <textarea class="form-control" id="txtBeginPrice" name="BeginPrice"></textarea>
                             </div>
                             <div class="form-group">
-                                <label for="txtFullDes">Người bán:</label>
-                                <textarea class="form-control" id="txtSeller" name="Seller">Admin</textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="txtFullDes">Ngày đăng:</label>
-                                <textarea class="form-control" id="txtUploadedDate" name="UploadedDate">{{ngay_dang}}</textarea>
+                                <label for="txtFullDes">Bước giá:</label>
+                                <textarea class="form-control" id="txtStep" name="Step"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="txtFullDes">Thời điểm kết thúc:</label>
                                 <textarea class="form-control" id="txtEndTime" name="EndTime"></textarea>
                             </div>
                             <div class="form-group">
-                                <label for="txtFullDes">Kích cỡ:</label>
-                                <textarea class="form-control" id="txtSize" name="Size"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="txtFullDes">Trọng lượng:</label>
-                                <textarea class="form-control" id="txtWeight" name="Weight"></textarea>
+                                <label for="txtType">Có tự động gia hạn hay không?</label>
+                                <select class="form-control" id="selectGiaHan" name="GiaHan">
+                                    <option>Không</option>
+                                    <option>Có</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="txtFullDes">Mô tả sản phẩm:</label>
                                 <textarea class="form-control" id="txtFullDes" name="FullDes"></textarea>
                             </div>
-                            <div class="form-group">
-                                    <label for="txtImage">Ảnh sản phẩm</label>
-                                    <div class="file-loading">
-                                        <input id="fuMain" name="fuMain" type="file">
-                                    </div>
-                            </div>
-                        </div>
-                        <div class="card-footer text-right">
+            </div>
+
+            <div class="card-footer text-right">
                         <button type="submit" class="btn btn-lg btn-success btn-block">
                             <i class="fa fa-check" aria-hidden="true"></i>
                             Xác nhận
@@ -122,40 +104,50 @@
                             <i class="fa fa-check" aria-hidden="true"></i>
                             Hủy
                         </button>
-                        </div>
-                    </div>
             </div>
-        
+        </div>
+    </div>      
     </form>
-    
 
+
+    <script>
+        tinymce.init(
+            {selector:'#txtFullDes'});
+
+        function vadication(){
+            var TenSp = document.forms["form"]["Name"];
+            var GiaKhoiDiem = document.forms["from"]["BeginPrice"];
+            var BuocGia = document.forms["form"]["Step"];
+            var ThoiGianKT = document.forms["form"]["EndTime"];
+            var MoTa = document.forms["form"]["FullDes"];
+            var HinhAnh = document.forms["form"]["fuMain"];
+
+            if (BuocGia.value < 0.1* GiaKhoiDiem.value ){
+                alert("Bước giá không được nhỏ hơn 10% giá khởi điểm.")
+                return false;
+            }
+
+            if( TenSp.value == "" || GiaKhoiDiem.value == "" || BuocGia.value == "" 
+            || ThoiGianKT.value == "" || MoTa.value == "" || HinhAnh.value == "")
+            {
+                alert("Please fill in all informations");
+                return false;
+            }
+
+            return true;
+        }
+
+        $('#txtEndTime').datetimepicker({
+            timepicker: false,
+            format: 'd/m/Y',
+            mask: true,
+            value: '1/1/2020'
+        });
+    </script>
+
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-    <src="https://cloud.tinymce.com/5/tinymce.min.js?apiKey=ezd73nxbzc7bu6e86g2l82jbbffke0mwevwrnyvc5q8h89j6"></script>
-    <script>
-        tinymce.init({
-            selector: '#txtFullDes',
-            height: 600,
-            plugins: 'paste image link autolink lists table media',
-            menubar: false,
-            toolbar: [
-            'undo redo | bold italic underline strikethrough | numlist bullist | alignleft aligncenter alignright',
-            'forecolor backcolor',
-            'table link image media',
-            ],
-        });
-    </script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/js/fileinput.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/themes/fa/theme.min.js"></script>
-    <script>
-        $('#fuMain').fileinput({
-            theme: 'fa',
-            dropZoneEnabled: false,
-            allowedFileExtensions: ['png', 'jpg', 'gif'],
-        });
-    </script>
 </body>
 </html>
