@@ -86,8 +86,8 @@ router.get('/login', (req, res) => {
 router.post('/login', async (req, res) => {
     const user = await nguoidungModel.singleByUsername(req.body.user);
 
-    console.log(user);
-    console.log(req.body.raw_password);
+   // console.log(user);
+   // console.log(req.body.raw_password);
 
     const rs = bcrypt.compareSync(req.body.raw_password, user.mat_khau);
     if (rs === false)
@@ -122,10 +122,30 @@ router.get('/profile/:id_user', restrict, async (req, res) => {
     //lấy sản phẩm yêu thích
     var farows = await sanphamModel.favourite(req.params.id_user);
 
+    //lấy sản phẩm đã đăng bán (của seller)
+    var selledrows = await sanphamModel.allBySeller(req.params.id_user);
+    console.log(selledrows);
+
+    /*if (user.quyen_han === 1){
+        var sellrows = await sanphamModel.allBySeller(user.id);
+        res.render('viewAccount/profile', {
+            user: rows,
+            empty: rows.length === 0,
+            favourite: farows,
+            empty_fa : farows.length === 0,
+            selled: sellrows,
+            empty_sell: sellrows.length === 0
+        });
+    }*/
+
+
     res.render('viewAccount/profile', {
         user: rows,
         empty: rows.length === 0,
         favourite: farows,
+        empty_fa : farows.length === 0,
+        selled: selledrows,
+        empty_sell: selledrows.length === 0
         empty_fa: farows.length === 0
     });
 });

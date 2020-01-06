@@ -42,5 +42,7 @@ module.exports = {
         const condition = { ID: entity[0].id};
         delete entity[0].id;
         return db.patch('san_pham',entity[0],condition);
-    }
+    },
+
+    allBySeller: (id_seller) => db.load(`select * from san_pham where nguoi_ban_id = '${id_seller}'`)
 }
