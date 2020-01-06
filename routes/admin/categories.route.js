@@ -73,7 +73,9 @@ router.get('/detail/:id', async (req, res) => {
   /*if (rows.length === 0) {
       throw new Error('Invalid category id');
   }*/
-
+  rows[0].ngay_dang = moment(rows[0].ngay_dang).format('MM/DD/YYYY h:mm a');
+  rows[0].ngay_het_han = moment(rows[0].ngay_het_han).format('MM/DD/YYYY h:mm a');
+    
   res.render('viewAdmin/detailCategories', {
     layout: false,
     bidders:bid,

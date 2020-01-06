@@ -20,7 +20,7 @@ router.post('/register', async (req, res) => {
     // if its blank or null means user has not selected the captcha, so return the error.
     if (req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null) {
         return res.render('viewAccount/register', {
-            err_message: 'Please select captcha'
+            err_message: 'Vui lòng hoàn thành captcha'
         });
     }
     // Put your secret key here.
@@ -33,7 +33,7 @@ router.post('/register', async (req, res) => {
         // Success will be true or false depending upon captcha validation.
         if (body.success !== undefined && !body.success) {
             return res.render('viewAccount/register', {
-                err_message: 'Failed captcha verification'
+                err_message: 'Xác thực captcha thất bại'
             });
         }
     });
@@ -50,14 +50,14 @@ router.post('/register', async (req, res) => {
     const user = await nguoidungModel.singleByUsername(req.body.ten_dang_nhap);
     if (user !== null) {
         return res.render('viewAccount/register', {
-            err_message: 'Username already exists'
+            err_message: 'Username đã tồn tại'
         })
     };
     //xử lý email đã tồn tại
     const email = await nguoidungModel.singleByEmail(req.body.email);
     if (email !== null) {
         return res.render('viewAccount/register', {
-            err_message: 'Email already exists'
+            err_message: 'Email đã tồn tại'
         })
     };
 
@@ -75,7 +75,7 @@ router.post('/register', async (req, res) => {
     const result = await nguoidungModel.add(entity);
 
     res.render('viewAccount/register', {
-        success: 'Register successful'
+        success: 'Đăng ký thành công'
     });
 });
 
@@ -86,15 +86,21 @@ router.get('/login', (req, res) => {
 router.post('/login', async (req, res) => {
     const user = await nguoidungModel.singleByUsername(req.body.user);
 
-   // console.log(user);
-   // console.log(req.body.raw_password);
+    if(user === null)
+    {
+        return res.render('viewAccount/login', {
+            err_message: 'Tài khoản hoặc mật khẩu không đúng'
+        });
+    }
+    // console.log(user);
+    // console.log(req.body.raw_password);
 
     const rs = bcrypt.compareSync(req.body.raw_password, user.mat_khau);
-    if (rs === false)
+    if (rs === false){
         return res.render('viewAccount/login', {
-            err_message: 'Invalid username or password'
+            err_message: 'Tài khoản hoặc mật khẩu không đúng'
         });
-
+    }
     delete user.mat_khau;
     req.session.isAuthenticated = true;
     req.session.authUser = user;
@@ -143,7 +149,7 @@ router.get('/profile/:id_user', restrict, async (req, res) => {
         user: rows,
         empty: rows.length === 0,
         favourite: farows,
-        empty_fa : farows.length === 0,
+        empty_fa: farows.length === 0,
         selled: selledrows,
         empty_sell: selledrows.length === 0,
         empty_fa: farows.length === 0
@@ -153,19 +159,22 @@ router.get('/profile/:id_user', restrict, async (req, res) => {
 router.post('/profile/upgrade/:id', async (req, res) => {
     //thêm vào bảng xin_phep_upgrade
     const rows = await xinphepUpgradeModel.single(req.params.id);
-    console.log(rows);
 
-    if (rows.length === 0) {
-        var today = new Date();
-        var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-
-        var entity = {};
-        entity.id_user = req.params.id;
-        entity.ngay_dk = date;
-
-        const result = await xinphepUpgradeModel.add(entity);
-        console.log(result);
+    for (var i of rows) {
+        if (i.id_user == req.params.id) {
+            res.redirect(req.headers.referer);
+        }
     }
+
+
+    var today = new Date();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
+    var entity = {};
+    entity.id_user = req.params.id;
+    entity.ngay_dk = date;
+
+    xinphepUpgradeModel.add(entity);
 
     res.redirect(req.headers.referer);
 })
@@ -242,6 +251,13 @@ router.post('/profile/changepass/:id_user', async (req, res) => {
 
     res.render('viewAccount/changePass', {
         err_message: 'Password is changed'
+    });
+})
+
+router.get('/:id/rate', async (req, res) => {
+    const rows = await nguoidungModel.single(req.params.id);
+    res.render('viewAccount/userRate', {
+        users: rows
     });
 })
 

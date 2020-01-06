@@ -5,7 +5,7 @@
       "port": 3306,
       "user": "root",
       "password": "",
-      "database": "qldg-newest"
+      "database": "qldg-completed"
     },
     "paginate": {
       "limit": 5

@@ -56,9 +56,13 @@
                 <h3 class="card-title">{{ten_sp}}</h3>
                 <h4 class="mb-0">Giá hiện tại: {{format gia_hien_tai}}</i></h4>
                 <h4 class="mb-0">Giá khởi điểm: {{format gia_khoi_diem}}</h4>
-                <small class="text-muted">Người bán: {{nguoi_ban_id}}</small>
+                {{/each}}
+                {{#each this.sellers}}
+                <small class="text-muted">Người bán: <a href="/account/{{id}}/rate">{{ten}}</a></small>
                 <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
                 4.0 stars
+                {{/each}}
+                {{#each this.products}}
                 <br>
                 <small class="text-muted">Ngày đăng: {{ngay_dang}}</small>
                 <br>
@@ -74,7 +78,7 @@
                     <div class="form-group mx-sm-3 mb-2">
                         <label for="gia_dau" class="sr-only"></label>
                         <input type="text" class="form-control" id="gia_dau" name="gia_dau"
-                            placeholder="Higher than {{gia_hien_tai}}" style="width: 300px">
+                            placeholder="Cao hơn {{gia_hien_tai}}" style="width: 300px">
                     </div>
                     <!--Bid Button-->
                     <button type="button" class="btn btn-secondary mb-2" data-toggle="modal" data-target="#myModal">Bid</button>

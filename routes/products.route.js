@@ -1,6 +1,7 @@
 const express = require('express');
 const yeuthichModel = require('../models/yeuthich.model');
 const productsModel = require('../models/sanpham.model');
+const nguoidungModel = require('../models/nguoidung.model');
 const bidModel = require('../models/chitietragia.model');
 const nodemailer = require("nodemailer");
 const moment = require('moment');
@@ -9,10 +10,12 @@ const router_Products = express.Router();
 
 router_Products.get('/:id/detailproduct', async(req,res) => {
   //console.log(req.params.id);
-
   const rows = await productsModel.single(req.params.id);
+  var sellerid = rows[0].nguoi_ban_id;
+  const users = await nguoidungModel.single(sellerid);
   res.render('viewProducts/products_detail', {
     products: rows,
+    userinfo: users,
     empty: rows.length === 0
   })
 })
