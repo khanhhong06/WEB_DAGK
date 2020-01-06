@@ -36,6 +36,9 @@ module.exports = {
 
     favourite: (user) => db.load(`select * from san_pham join yeu_thich on id = id_sp and id_user = '${user}'`),
 
+    bidder:(id)=>db.load(`select ten_dang_nhap, gia,thoi_diem_ra_gia from chi_tiet_ra_gia AS ctrg JOIN nguoi_dung nd ON ctrg.nguoi_dung_id=nd.id where ctrg.san_pham_id='${id}'`),
+
+
     updatePrice: entity =>{
         const condition = { ID: entity[0].id};
         delete entity[0].id;
