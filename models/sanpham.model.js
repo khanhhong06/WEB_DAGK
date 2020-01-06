@@ -2,14 +2,21 @@ const db = require('../utils/db');
 const config = require('../config/default.json');
 
 module.exports = {
-    all: () => db.load(`select * from san_pham`),
+    all: () => db.load(`select sp.*,count(ctrg.san_pham_id) as total from san_pham as sp LEFT JOIN chi_tiet_ra_gia as ctrg ON sp.id=ctrg.san_pham_id group by sp.id `),
     single: id => db.load(`select * from san_pham where id = ${id}`),
-    allByCat: id_loai => db.load(`select * from san_pham where chung_loai = '${id_loai}'`),
+    allByCat: id_loai => db.load(`select sp.*,count(ctrg.san_pham_id) as total
+    from san_pham as sp left join chi_tiet_ra_gia as ctrg on sp.id=ctrg.san_pham_id
+    where sp.chung_loai=2
+    group by sp.id`),
     countByCat: async id_loai => {
         const rows = await db.load(`select count(*) as total from san_pham where chung_loai = ${id_loai}`)
         return rows[0].total;
     },
-    pageByCat: (id_loai,offset) => db.load(`select * from san_pham where chung_loai = ${id_loai} limit ${config.paginate.limit} offset ${offset}`),
+    pageByCat: (id_loai,offset) => db.load(`select sp.*,count(ctrg.san_pham_id) as total
+    from san_pham as sp left join chi_tiet_ra_gia as ctrg on sp.id=ctrg.san_pham_id
+    where sp.chung_loai=${id_loai}
+    group by sp.id
+    limit ${config.paginate.limit} offset ${offset}`),
     add: entity =>db.add('san_pham', entity),
     del: id => db.del('san_pham',{ID: id}),
     patch: entity => {
@@ -26,10 +33,16 @@ module.exports = {
         let rows;
         if (searchType=='0'){
             console.log(inputSearch);
-            rows= await db.load(`select * from san_pham where ten_sp like '%${inputSearch}%'`)
+            rows= await db.load(`select sp.*,count(ctrg.san_pham_id) as total
+            from san_pham as sp left join chi_tiet_ra_gia as ctrg on sp.id=ctrg.san_pham_id
+            where sp.ten_sp like '%${inputSearch}%'
+            group by sp.id`)
         }
         else {
-            rows= await db.load(`select * from san_pham where ten_sp like '%${inputSearch}%' and chung_loai = '${searchType}'`)
+            rows= await db.load(`select sp.*,count(ctrg.san_pham_id) as total
+            from san_pham as sp left join chi_tiet_ra_gia as ctrg on sp.id=ctrg.san_pham_id
+            where sp.ten_sp like '%${inputSearch}%' and sp.chung_loai='${searchType}'
+            group by sp.id`)
         }
         return rows;
     },
