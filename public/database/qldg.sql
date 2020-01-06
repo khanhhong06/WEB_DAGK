@@ -216,7 +216,7 @@ ALTER TABLE `san_pham_has_ptgn`
 -- AUTO_INCREMENT for table `chi_tiet_ra_gia`
 --
 ALTER TABLE `chi_tiet_ra_gia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 --

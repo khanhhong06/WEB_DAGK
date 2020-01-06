@@ -112,7 +112,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="card card-outline-secondary my-2">
         <div class="card-header">
             Reviews sản phẩm
@@ -135,10 +135,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{#each this.bidders}}
+                            {{#each ../bidders}}
                             <tr>
                                 <td>{{ten_dang_nhap}}</td>
-                                <td>{{gia}}</td>
+                                <td>{{format gia}}</td>
                                 <td>{{thoi_diem_ra_gia}}</td>
                             </tr>
                             {{/each}}

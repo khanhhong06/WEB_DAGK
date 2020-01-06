@@ -9,30 +9,50 @@ const config = require('../config/default.json');
 
 const router = express.Router();
 
-router.get('/register', async(req,res) => {
+router.get('/register', async (req, res) => {
     res.render('viewAccount/register');
 });
 
-router.post('/register', async(req, res) => {
+router.post('/register', async (req, res) => {
+
+    // g-recaptcha-response is the key that browser will generate upon form submit.
+    // if its blank or null means user has not selected the captcha, so return the error.
+    if (req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null) {
+        return res.json({ "responseCode": 1, "responseDesc": "Please select captcha" });
+    }
+    // Put your secret key here.
+    var secretKey = "6Le_wswUAAAAALkRXypz0Ih3IfB_BO6VjRCApG4G";
+    // req.connection.remoteAddress will provide IP address of connected user.
+    var verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
+    // Hitting GET request to the URL, Google will respond with success or error scenario.
+    request(verificationUrl, function (error, response, body) {
+        body = JSON.parse(body);
+        // Success will be true or false depending upon captcha validation.
+        if (body.success !== undefined && !body.success) {
+            return res.json({ "responseCode": 1, "responseDesc": "Failed captcha verification" });
+        }
+        res.json({ "responseCode": 0, "responseDesc": "Sucess" });
+    });
+
+    console.log(req.body);
+
     const N = 10;
-    const hash = bcrypt.hashSync(req.body.raw_password,N);
-    var dob = moment(req.body.dob,'DD/MM/YYYY').format('YYYY-MM-DD');
+    const hash = bcrypt.hashSync(req.body.raw_password, N);
+    var dob = moment(req.body.dob, 'DD/MM/YYYY').format('YYYY-MM-DD');
     const entity = req.body;
     //xử lý tài khoản có tồn tại hay chưa
     const user = await nguoidungModel.singleByUsername(req.body.ten_dang_nhap);
-    if (user !== null)
-    {
+    if (user !== null) {
         return res.render('viewAccount/register', {
             err_message: 'Username already exists'
-          })
+        })
     };
     //xử lý email đã tồn tại
     const email = await nguoidungModel.singleByEmail(req.body.email);
-    if (email !== null)
-    {
+    if (email !== null) {
         return res.render('viewAccount/register', {
             err_message: 'Email already exists'
-          })
+        })
     };
 
     console.log(entity);
@@ -45,7 +65,7 @@ router.post('/register', async(req, res) => {
     delete entity.raw_password;
     delete entity.dob;
     delete entity.raw_cf_password;
-    
+
     const result = await nguoidungModel.add(entity);
 
     res.render('viewAccount/register', {
@@ -65,17 +85,17 @@ router.post('/login', async (req, res) => {
 
     const rs = bcrypt.compareSync(req.body.raw_password, user.mat_khau);
     if (rs === false)
-      return res.render('viewAccount/login', {
-        err_message: 'Invalid username or password'
-      });
-  
+        return res.render('viewAccount/login', {
+            err_message: 'Invalid username or password'
+        });
+
     delete user.mat_khau;
     req.session.isAuthenticated = true;
     req.session.authUser = user;
-  
+
     var url = req.query.retUrl || '/';
 
-    if (user.ten_dang_nhap === 'admin' || user.ten_dang_nhap === 'admin1' || user.ten_dang_nhap === 'admin2'){
+    if (user.ten_dang_nhap === 'admin' || user.ten_dang_nhap === 'admin1' || user.ten_dang_nhap === 'admin2') {
         const PORT = config.host.port;
         url = `http://localhost:${PORT}/admin`;
     }
@@ -120,6 +140,7 @@ router.get('/profile/:id_user', restrict, async (req, res) => {
         empty_fa : farows.length === 0,
         selled: selledrows,
         empty_sell: selledrows.length === 0
+        empty_fa: farows.length === 0
     });
 });
 
@@ -130,16 +151,16 @@ router.post('/profile/upgrade/:id', async (req, res) => {
 
     if (rows.length === 0) {
         var today = new Date();
-        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    
+        var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
         var entity = {};
         entity.id_user = req.params.id;
         entity.ngay_dk = date;
-    
+
         const result = await xinphepUpgradeModel.add(entity);
         console.log(result);
     }
-    
+
     res.redirect(req.headers.referer);
 })
 
@@ -147,10 +168,10 @@ router.get('/profile/change/:id_user', async (req, res) => {
     const row = await nguoidungModel.single(req.params.id_user);
 
     res.render('viewAccount/changeProfile',
-    {
-        info: row,
-        empty: row.length
-    });
+        {
+            info: row,
+            empty: row.length
+        });
 })
 
 router.post('/profile/change/:id_user', async (req, res) => {
@@ -168,10 +189,10 @@ router.post('/profile/change/:id_user', async (req, res) => {
         row.ngay_sinh = entity.DOB;
         const result = await nguoidungModel.patch(row);
     }
-    else{//có tài khoản có email trùng
+    else {//có tài khoản có email trùng
         //có phải tài khoản đang được đăng nhập hay ko
         const r = email.id === row.id;
-        if (r){ // true
+        if (r) { // true
             row.ten = entity.Name;
             row.email = entity.Email;
             row.ngay_sinh = entity.DOB;
@@ -179,13 +200,13 @@ router.post('/profile/change/:id_user', async (req, res) => {
         } else {
             return res.render('viewAccount/register', {
                 err_message: 'Email already exists'
-                });
+            });
         }
     }
 
     res.redirect(req.headers.referer);
 })
-  
+
 router.get('/profile/changepass/:id_user', (req, res) => {
     res.render('viewAccount/changePass');
 })
@@ -196,15 +217,15 @@ router.post('/profile/changepass/:id_user', async (req, res) => {
 
     const rs = bcrypt.compareSync(req.body.oldPass, row.mat_khau);
     if (rs === false)
-      return res.render('viewAccount/changePass', {
-        err_message: 'Invalid password'
-      });
+        return res.render('viewAccount/changePass', {
+            err_message: 'Invalid password'
+        });
 
     //re === true
     console.log(req.body.newPass);
 
-    const N=10;
-    const hash = bcrypt.hashSync(req.body.newPass,N);
+    const N = 10;
+    const hash = bcrypt.hashSync(req.body.newPass, N);
     console.log(hash);
 
     row.mat_khau = hash;

@@ -1,4 +1,5 @@
 const express = require('express');
+const dataMask=require('data-mask');
 const sanphamModel = require('../../models/sanpham.model');
 const phanloaiModel = require('../../models/phanloai.model');
 const config = require('../../config/default.json');
@@ -9,6 +10,16 @@ const rimraf = require('rimraf');
 
 
 const router = express.Router();
+
+function decreasePrice( a, b ) {
+  if (a.gia_hien_tai > b.gia_hien_tai){
+    return -1;
+  }
+  if (a.gia_hien_tai < b.gia_hien_tai ){
+    return 1;
+  }
+  return 0;
+}
 
 //XU LY CAC THAO TAC QUAN LY SAN PHAM: xem chi tiet, xoa, chinh sua
 
@@ -49,12 +60,23 @@ router.get('/cat/all', async (req, res) => {
 
 router.get('/detail/:id', async (req, res) => {
   const rows = await sanphamModel.single(req.params.id);
+  const bid=await sanphamModel.bidder(req.params.id);
+  bid.sort(decreasePrice);
+  for (var i=0;i<bid.length;i++){
+    var dataMasker = new dataMask(bid[i].ten_dang_nhap);
+    // bid[i].ten_dang_nhap=bid[i].ten_dang_nhap.maskRight(5);
+    var num=(bid[i].ten_dang_nhap.length/2)+1;
+    bid[i].ten_dang_nhap=dataMasker.maskLeft(num);
+    console.log(bid[i].ten_dang_nhap);
+    // console.log(bid[i]);
+  }
   /*if (rows.length === 0) {
       throw new Error('Invalid category id');
   }*/
 
   res.render('viewAdmin/detailCategories', {
     layout: false,
+    bidders:bid,
     products: rows,
   });
 })
@@ -75,6 +97,7 @@ router.post('/del/:id', async (req, res) => {
 
 router.get('/edit/:id', async (req, res) => {
   const rows = await sanphamModel.single(req.params.id);
+  console.log(rows);
   res.render('viewAdmin/editProducts', {
     layout: false,
     products: rows,
