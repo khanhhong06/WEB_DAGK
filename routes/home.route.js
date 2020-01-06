@@ -1,4 +1,5 @@
 const express = require('express');
+const dataMask = require('data-mask');
 const productsModel = require('../models/sanpham.model');
 const config = require('../config/default.json');
 const moment = require('moment');
@@ -13,6 +14,17 @@ function increaseDate(a,b){
     return -1;
   }
   if (a.ngay_het_han > b.ngay_het_han){
+      return 1;
+  }
+  return 0;
+}
+
+function decreaseDate(a,b){
+  var tempa,tempb;
+  if (a.thoi_diem_ra_gia > b.thoi_diem_ra_gia){
+    return -1;
+  }
+  if (a.thoi_diem_ra_gia < b.thoi_diem_ra_gia){
       return 1;
   }
   return 0;
@@ -149,10 +161,32 @@ router.get('/:id_loai/products', async (req, res) => {
 
 router.get('/:id/detailproduct', async(req,res) => {
   //console.log(req.params.id);
-
+// let bid=[];
+  const bid=await productsModel.bidder(req.params.id);
+  bid.sort(decreaseDate);
+  // const bid=[];
+  // var c={};
+  // for (var i=0;i<bid.length;i++){
+  //   c.add(i+1);
+  //   console.log(c);
+  // }
+  // bid.push(bidhis);
+  // bid.push(c);
+  // // bid.count=c;
+  console.log(bid);
+  console.log("ahhaaaaaaaaa");
+  for (var i=0;i<bid.length;i++){
+    var dataMasker = new dataMask(bid[i].ten_dang_nhap);
+    // bid[i].ten_dang_nhap=bid[i].ten_dang_nhap.maskRight(5);
+    var num=(bid[i].ten_dang_nhap.length/2)+1;
+    bid[i].ten_dang_nhap=dataMasker.maskRight(num);
+    console.log(bid[i].ten_dang_nhap);
+    // console.log(bid[i]);
+  }
   const rows = await productsModel.single(req.params.id);
   res.render('viewProducts/products_detail', {
     products: rows,
+    bidders:bid,
     empty: rows.length === 0
   })
 })

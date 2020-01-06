@@ -55,7 +55,7 @@
             <div class="card-body">
                 <h3 class="card-title">{{ten_sp}}</h3>
                 <h4 class="mb-0">Giá hiện tại: {{format gia_hien_tai}}</i></h4>
-                <h4 class="mb-0">Giá khởi điệm: {{format gia_khoi_diem}}</h4>
+                <h4 class="mb-0">Giá khởi điểm: {{format gia_khoi_diem}}</h4>
                 <small class="text-muted">Người bán: {{nguoi_ban_id}}</small>
                 <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
                 4.0 stars
@@ -114,6 +114,7 @@
             </div>
         </div>
     </div>
+    {{/each}}
     <div class="card card-outline-secondary my-2">
         <div class="card-header">
             Reviews sản phẩm
@@ -129,39 +130,39 @@
                 <div class="card card-body">
                     <table class="table table-striped">
                         <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Thời điểm</th>
+                            <tr>                           
                                 <th scope="col">Người mua</th>
                                 <th scope="col">Giá</th>
+                                <th scope="col">Thời điểm</th>
                             </tr>
                         </thead>
                         <tbody>
+                            {{#each this.bidders}}
                             <tr>
-                                <th scope="row">1</th>
-                                <td>17:40:33 07/11/2019</td>
-                                <td>Otto</td>
-                                <td>920.000</td>
+                                <td>{{ten_dang_nhap}}</td>
+                                <td>{{gia}}</td>
+                                <td>{{thoi_diem_ra_gia}}</td>
                             </tr>
-                            <tr>
+                            {{/each}}
+                            {{!-- <tr>
                                 <th scope="row">2</th>
                                 <td>18:10:11 07/11/2019</td>
                                 <td>Thornton</td>
                                 <td>910.000</td>
                             </tr>
-                            <tr>
+                            <tr>`
                                 <th scope="row">3</th>
                                 <td>03:04:12 10/11/2019</td>
                                 <td>the Bird</td>
                                 <td>1.100.000</td>
-                            </tr>
+                            </tr> --}}
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-    {{/each}}
+    
     <div class="card card-outline-secondary my-4">
         <div class="card-header">
             Sản phẩm tương tự
