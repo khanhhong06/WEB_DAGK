@@ -160,23 +160,22 @@
             </div>
         </div>
     </div>
-    {{/each}}
     <div class="card card-outline-secondary my-4">
         <div class="card-header">
             Sản phẩm tương tự
         </div>
         <div class="card-body row m-1" style="display: flex;justify-content: center;">
+            {{#each ../this.relate}}
             <div class="card" style="width: 13rem;">
-                <img src="https://salt.tikicdn.com/cache/w1200/ts/product/ec/66/e5/84cbbcf94635a96293b851e31a73b08e.jpg"
+                <img src="/images/{{id}}/main.jpg"
                     class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">Điện Thoại Oneplus 6T (8Gb + 128Gb)</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-secondary">Chi tiết</a>
+                    <h5 class="card-title">{{ten_sp}}</h5>
+                    <a href="/{{id}}/detailproduct" class="btn btn-secondary">Chi tiết</a>
                 </div>
             </div>
-            <div class="card" style="width: 13rem;">
+            {{/each}}
+            {{!-- <div class="card" style="width: 13rem;">
                 <img src="https://salt.tikicdn.com/cache/w1200/ts/product/fa/96/62/2772c85bc385cb8c7d10372971f5d7a1.jpg"
                     class="card-img-top" alt="...">
                 <div class="card-body">
@@ -217,7 +216,8 @@
                         card's content.</p>
                     <a href="#" class="btn btn-secondary">Chi tiết</a>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
+    {{/each}}
 </div>

@@ -44,5 +44,9 @@ module.exports = {
         return db.patch('san_pham',entity[0],condition);
     },
 
-    allBySeller: (id_seller) => db.load(`select * from san_pham where nguoi_ban_id = '${id_seller}'`)
+    allBySeller: (id_seller) => db.load(`select * from san_pham where nguoi_ban_id = '${id_seller}'`),
+
+    relate:(id)=>db.load(`SELECT sp2.*
+    from san_pham as sp1 join san_pham as sp2
+    where sp1.id='${id}' and sp1.chung_loai=sp2.chung_loai and sp2.id<>sp1.id limit 5`)
 }

@@ -180,9 +180,13 @@ router.get('/:id/detailproduct', async(req,res) => {
     // console.log(bid[i]);
   }
   const rows = await productsModel.single(req.params.id);
+  const relate=await productsModel.relate(req.params.id);
+  console.log("haha");
+  console.log(relate);
   res.render('viewProducts/products_detail', {
     products: rows,
     bidders:bid,
+    relate: relate,
     empty: rows.length === 0
   })
 })
